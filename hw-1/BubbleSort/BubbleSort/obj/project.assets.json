@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\TL-Practice\\1\\BubbleSort\\BubbleSort\\BubbleSort.csproj",
+      "projectUniqueName": "D:\\TL-Practice\\hw-1\\BubbleSort\\BubbleSort\\BubbleSort.csproj",
       "projectName": "BubbleSort",
-      "projectPath": "D:\\TL-Practice\\1\\BubbleSort\\BubbleSort\\BubbleSort.csproj",
+      "projectPath": "D:\\TL-Practice\\hw-1\\BubbleSort\\BubbleSort\\BubbleSort.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "D:\\TL-Practice\\1\\BubbleSort\\BubbleSort\\obj\\",
+      "outputPath": "D:\\TL-Practice\\hw-1\\BubbleSort\\BubbleSort\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",

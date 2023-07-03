@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "gzIKBvlcTBOI4gOd5KBykI24n9f7ibszpFGkb+CkbI4u1PDAu5aUkUtVdwh+qDWGLdzgoMnJ7DT60YUOZSmTYA==",
+  "dgSpecHash": "FtKuLMmde0po5iFfjRE3REb50xa3i9X7MUOfnfjBSzBEdPCnOw5Amxge6DOi8NS6Wh6Txnn9moPAr2eAy4E/VA==",
   "success": true,
-  "projectFilePath": "D:\\TL-Practice\\1\\BubbleSort\\BubbleSort\\BubbleSort.csproj",
+  "projectFilePath": "D:\\TL-Practice\\hw-1\\BubbleSort\\BubbleSort\\BubbleSort.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.19\\microsoft.windowsdesktop.app.ref.6.0.19.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.19\\microsoft.netcore.app.ref.6.0.19.nupkg.sha512",
