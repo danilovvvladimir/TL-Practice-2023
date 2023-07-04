@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "wH+y6Bds2m5X8I8kYp0R3WdxNojVpP42jPoWZxJ7A0i9CEAj8ONxhlSWSOd/TSaPs9MCYWtLj4eXHSdgo5j8vQ==",
+  "dgSpecHash": "R33CVdXwOCjoHzL7aU0/RnnRLhDCldaCYETto4XLzWKiN3+/2F6uVbt9hZhA+1aIh18Zb7E1VQA4F+Ojqfn0tg==",
   "success": true,
-  "projectFilePath": "D:\\TL-Practice\\1\\ReadInfo\\ReadInfo\\ReadInfo.csproj",
+  "projectFilePath": "D:\\TL-Practice\\hw-1\\ReadInfo\\ReadInfo\\ReadInfo.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.19\\microsoft.windowsdesktop.app.ref.6.0.19.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.19\\microsoft.netcore.app.ref.6.0.19.nupkg.sha512",

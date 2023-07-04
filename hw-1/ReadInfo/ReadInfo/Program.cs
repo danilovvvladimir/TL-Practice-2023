@@ -2,6 +2,17 @@
 
 class Program
 {
+    static bool IsEmail(string email)
+    {
+        Regex emailRegex = new Regex(@"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$");
+        return email is null ? false : emailRegex.IsMatch(email);
+    }
+    static bool IsGithubURL(string github)
+    {
+        Regex githubRegex = new Regex(@"^(https?:\/\/)?(www\.)?github\.com\/[a-zA-Z0-9-_]");
+        return github is null ? false : githubRegex.IsMatch(github);
+    }
+
     static void Main(string[] args)
     {
         // === FIO ===
@@ -39,26 +50,38 @@ class Program
         Console.WriteLine("3. Получение email.");
         string email = string.Empty;
         bool isValidEmail = false;
-        Regex emailRegex = new Regex(@"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$");
 
         while (!isValidEmail)
         {
             Console.Write("Введите email: ");
             email = Console.ReadLine();
 
-            isValidEmail = emailRegex.IsMatch(email);
+            isValidEmail = IsEmail(email);
 
             if (!isValidEmail)
             {
-                Console.WriteLine("Ошибка. Невалидный email.");
+                Console.WriteLine("Ошибка. Невалидный email. Попробуйте ещё раз.");
             }
         }
         Console.WriteLine();
 
         // === GITHUB ===
         Console.WriteLine("4. Получение Github.");
-        Console.Write("Введите github: ");
-        string github = Console.ReadLine();
+        string github = string.Empty;
+        bool isValidGithubURL = false;
+
+        while (!isValidGithubURL)
+        {
+            Console.Write("Введите ссылку на github (https://github.com/<your name>): ");
+            github = Console.ReadLine();
+
+            isValidGithubURL = IsGithubURL(github);
+
+            if (!isValidEmail)
+            {
+                Console.WriteLine("Ошибка. Невалидная ссылка на github. Попробуйте ещё раз.");
+            }
+        }
         Console.WriteLine();
 
         // === OUTPUT ===

@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\TL-Practice\\1\\ReadInfo\\ReadInfo\\ReadInfo.csproj",
+      "projectUniqueName": "D:\\TL-Practice\\hw-1\\ReadInfo\\ReadInfo\\ReadInfo.csproj",
       "projectName": "ReadInfo",
-      "projectPath": "D:\\TL-Practice\\1\\ReadInfo\\ReadInfo\\ReadInfo.csproj",
+      "projectPath": "D:\\TL-Practice\\hw-1\\ReadInfo\\ReadInfo\\ReadInfo.csproj",
       "packagesPath": "C:\\Users\\Admin\\.nuget\\packages\\",
-      "outputPath": "D:\\TL-Practice\\1\\ReadInfo\\ReadInfo\\obj\\",
+      "outputPath": "D:\\TL-Practice\\hw-1\\ReadInfo\\ReadInfo\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Admin\\AppData\\Roaming\\NuGet\\NuGet.Config",
