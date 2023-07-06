@@ -6,29 +6,33 @@ namespace Shapes
     {
         private double _sideLength;
 
-        public Square(double sideLength)
+        public double SideLength
         {
-            if (sideLength <= 0)
+            get => _sideLength;
+            set
             {
-                throw new ArgumentException("Length of square's side must be a positive number");
-            }
+                if (value <= 0)
+                {
+                    throw new ArgumentException("Length of square's side must be a positive number");
+                }
 
-            _sideLength = sideLength;
+                _sideLength = value;
+            }
         }
 
-        public double GetSideLength()
+        public Square(double sideLength)
         {
-            return _sideLength;
+            SideLength = sideLength;
         }
 
         public double CalculateArea()
         {
-            return _sideLength * _sideLength;
+            return SideLength * SideLength;
         }
 
         public double CalculatePerimeter()
         {
-            return _sideLength * 4;
+            return SideLength * 4;
         }
     }
 }
