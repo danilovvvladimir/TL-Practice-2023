@@ -10,7 +10,7 @@ namespace Shapes
 
         public double Side1
         {
-            get { return _side1; }
+            get => _side1;
             set
             {
                 if (value <= 0)
@@ -24,7 +24,7 @@ namespace Shapes
 
         public double Side2
         {
-            get { return _side2; }
+            get => _side2;
             set
             {
                 if (value <= 0)
@@ -38,13 +38,14 @@ namespace Shapes
 
         public double Side3
         {
-            get { return _side3; }
+            get => _side3;
             set
             {
                 if (value <= 0)
                 {
                     throw new ArgumentException("Side3 must be a positive number.");
                 }
+
                 _side3 = value;
             }
         }
@@ -80,6 +81,5 @@ namespace Shapes
                 (Side1 + Side3 > Side2) &&
                 (Side2 + Side3 > Side1);
         }
-
     }
 }
