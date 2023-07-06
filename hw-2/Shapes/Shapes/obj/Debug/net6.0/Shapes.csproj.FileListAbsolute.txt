@@ -1,0 +1,15 @@
+D:\TL-Practice\hw-2\Shapes\Shapes\bin\Debug\net6.0\Shapes.exe
+D:\TL-Practice\hw-2\Shapes\Shapes\bin\Debug\net6.0\Shapes.deps.json
+D:\TL-Practice\hw-2\Shapes\Shapes\bin\Debug\net6.0\Shapes.runtimeconfig.json
+D:\TL-Practice\hw-2\Shapes\Shapes\bin\Debug\net6.0\Shapes.dll
+D:\TL-Practice\hw-2\Shapes\Shapes\bin\Debug\net6.0\Shapes.pdb
+D:\TL-Practice\hw-2\Shapes\Shapes\obj\Debug\net6.0\Shapes.csproj.AssemblyReference.cache
+D:\TL-Practice\hw-2\Shapes\Shapes\obj\Debug\net6.0\Shapes.GeneratedMSBuildEditorConfig.editorconfig
+D:\TL-Practice\hw-2\Shapes\Shapes\obj\Debug\net6.0\Shapes.AssemblyInfoInputs.cache
+D:\TL-Practice\hw-2\Shapes\Shapes\obj\Debug\net6.0\Shapes.AssemblyInfo.cs
+D:\TL-Practice\hw-2\Shapes\Shapes\obj\Debug\net6.0\Shapes.csproj.CoreCompileInputs.cache
+D:\TL-Practice\hw-2\Shapes\Shapes\obj\Debug\net6.0\Shapes.dll
+D:\TL-Practice\hw-2\Shapes\Shapes\obj\Debug\net6.0\refint\Shapes.dll
+D:\TL-Practice\hw-2\Shapes\Shapes\obj\Debug\net6.0\Shapes.pdb
+D:\TL-Practice\hw-2\Shapes\Shapes\obj\Debug\net6.0\Shapes.genruntimeconfig.cache
+D:\TL-Practice\hw-2\Shapes\Shapes\obj\Debug\net6.0\ref\Shapes.dll
