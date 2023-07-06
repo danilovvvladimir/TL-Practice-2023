@@ -1,11 +1,14 @@
-﻿namespace Shapes
+﻿using Shapes.Shapes;
+
+namespace Shapes
 {
     public class Circle : IShape
     {
         private double _radius;
+
         public Circle(double radius)
         {
-            if (radius < 0)
+            if (radius <= 0)
             {
                 throw new ArgumentException("Radius must be a positive number");
             }
@@ -16,16 +19,6 @@
         public double GetRadius()
         {
             return _radius;
-        }
-
-        public void SetRadius(double newRadius)
-        {
-            if (newRadius < 0)
-            {
-                throw new ArgumentException("Radius must be a positive number");
-            }
-
-            _radius = newRadius;
         }
 
         public double CalculateArea()
