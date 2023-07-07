@@ -1,7 +1,8 @@
 ﻿using System.Text.RegularExpressions;
+
 namespace ReadInfo
 {
-    internal class Program
+    public class Program
     {
         public static bool IsEmail(string email)
         {

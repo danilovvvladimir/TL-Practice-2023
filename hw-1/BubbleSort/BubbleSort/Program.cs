@@ -1,6 +1,6 @@
 ﻿namespace BubbleSort
 {
-    internal class Program
+    public class Program
     {
         public static void BubbleSort(List<int> list)
         {
