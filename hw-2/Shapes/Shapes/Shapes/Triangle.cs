@@ -19,6 +19,11 @@ namespace Shapes
                 }
 
                 _side1 = value;
+
+                if (!IsValid())
+                {
+                    throw new Exception("Triangle with these sides can not exist.");
+                }
             }
         }
 
@@ -33,6 +38,11 @@ namespace Shapes
                 }
 
                 _side2 = value;
+
+                if (!IsValid())
+                {
+                    throw new Exception("Triangle with these sides can not exist.");
+                }
             }
         }
 
@@ -47,14 +57,19 @@ namespace Shapes
                 }
 
                 _side3 = value;
+
+                if (!IsValid())
+                {
+                    throw new Exception("Triangle with these sides can not exist.");
+                }
             }
         }
 
         public Triangle(double side1, double side2, double side3)
         {
-            Side1 = side1;
-            Side2 = side2;
-            Side3 = side3;
+            _side1 = side1;
+            _side2 = side2;
+            _side3 = side3;
 
             if (!IsValid())
             {

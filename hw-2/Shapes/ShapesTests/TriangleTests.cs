@@ -60,5 +60,18 @@ namespace ShapesTests
 
             Assert.AreEqual(correctArea, actualArea);
         }
+
+        [Test]
+        public void SetSide_InvalidArgument()
+        {
+            double side1 = 10;
+            double side2 = 12;
+            double side3 = 12;
+
+            Triangle triangle = new Triangle(side1, side2, side3);
+
+
+            Assert.Throws<Exception>(() => triangle.Side1 = 10000000);
+        }
     }
 }

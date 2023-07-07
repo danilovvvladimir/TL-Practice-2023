@@ -1,10 +1,11 @@
 ﻿namespace Shapes
 {
-    internal class Program
+    public class Program
     {
         public static void Main()
         {
             Triangle triangle = new(4, 5, 3);
+
             Console.WriteLine("Triangle");
             Console.WriteLine(triangle.CalculateArea());
             Console.WriteLine(triangle.CalculatePerimeter());
