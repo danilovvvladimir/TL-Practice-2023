@@ -18,10 +18,13 @@ namespace Shapes
                     throw new ArgumentException("Side1 must be a positive number.");
                 }
 
+                double previousValue = _side1;
+
                 _side1 = value;
 
                 if (!IsValid())
                 {
+                    _side1 = previousValue;
                     throw new Exception("Triangle with these sides can not exist.");
                 }
             }
@@ -37,10 +40,13 @@ namespace Shapes
                     throw new ArgumentException("Side2 must be a positive number.");
                 }
 
+                double previousValue = _side2;
+
                 _side2 = value;
 
                 if (!IsValid())
                 {
+                    _side2 = previousValue;
                     throw new Exception("Triangle with these sides can not exist.");
                 }
             }
@@ -56,10 +62,13 @@ namespace Shapes
                     throw new ArgumentException("Side3 must be a positive number.");
                 }
 
+                double previousValue = _side3;
+
                 _side3 = value;
 
                 if (!IsValid())
                 {
+                    _side3 = previousValue;
                     throw new Exception("Triangle with these sides can not exist.");
                 }
             }
