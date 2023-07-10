@@ -13,7 +13,7 @@
             try
             {
                 Console.WriteLine("Change side:");
-                triangle.Side1 = 12345;
+                triangle.Side3 = 3;
             }
             catch (Exception e)
             {
