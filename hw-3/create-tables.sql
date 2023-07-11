@@ -1,5 +1,13 @@
 USE EcommerceDB;
 
+CREATE TABLE [Client] (
+	ClientId int IDENTITY (1,1) CONSTRAINT PK_Client PRIMARY KEY,
+	FirstName nvarchar(50) NOT NULL,
+	LastName nvarchar(50) NOT NULL,
+	Email nvarchar(100) NOT NULL,
+	Address nvarchar(100) NOT NULL,
+);
+
 CREATE TABLE [Product] (
 	ProductId int IDENTITY (1,1) CONSTRAINT PK_Product PRIMARY KEY,
 	Name nvarchar(50) NOT NULL,
@@ -18,20 +26,22 @@ CREATE TABLE [Order] (
 	TotalPrice money NOT NULL,
 	Address nvarchar(100) NOT NULL,
 	DeliveryDate date NOT NULL,
-	OrderStatusId int CONSTRAINT FK_Order_OrderStatusId FOREIGN KEY (OrderStatusId) REFERENCES [OrderStatus](OrderStatusId),
+	ClientId int CONSTRAINT FK_Order_ClientId FOREIGN KEY (ClientId) REFERENCES Client(ClientId)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE,
+	OrderStatusId int CONSTRAINT FK_Order_OrderStatusId FOREIGN KEY (OrderStatusId) REFERENCES [OrderStatus](OrderStatusId)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE,
 )
 
 CREATE TABLE [OrderHasProduct] (
     OrderProductId int IDENTITY (1,1) CONSTRAINT PK_OrderHasProduct PRIMARY KEY,
     Quantity int NOT NULL,
-    OrderId int CONSTRAINT FK_OrderProduct_Order FOREIGN KEY (OrderId) REFERENCES [Order](OrderId),
+    OrderId int CONSTRAINT FK_OrderProduct_Order FOREIGN KEY (OrderId) REFERENCES [Order](OrderId)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE,
     ProductId int CONSTRAINT FK_OrderProduct_Product FOREIGN KEY (ProductId) REFERENCES Product(ProductId)
+		ON DELETE CASCADE
+		ON UPDATE CASCADE,
 );
 
-CREATE TABLE [Client] (
-	ClientId int IDENTITY (1,1) CONSTRAINT PK_Client PRIMARY KEY,
-	FirstName nvarchar(50) NOT NULL,
-	LastName nvarchar(50) NOT NULL,
-	Email nvarchar(100) NOT NULL,
-	Address nvarchar(100) NOT NULL,
-);
