@@ -5,7 +5,7 @@ FROM Client;
 
 SELECT *
 FROM Client
-WHERE FirstName = 'Владимир';
+WHERE FirstName = 'Vladimir';
 
 SELECT *
 FROM Product
