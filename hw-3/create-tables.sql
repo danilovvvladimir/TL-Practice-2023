@@ -35,7 +35,7 @@ CREATE TABLE [Order] (
 )
 
 CREATE TABLE [OrderHasProduct] (
-    OrderProductId int IDENTITY (1,1) CONSTRAINT PK_OrderHasProduct PRIMARY KEY,
+    OrderHasProductId int IDENTITY (1,1) CONSTRAINT PK_OrderHasProduct PRIMARY KEY,
     Quantity int NOT NULL,
     OrderId int CONSTRAINT FK_OrderProduct_Order FOREIGN KEY (OrderId) REFERENCES [Order](OrderId)
 		ON DELETE CASCADE
