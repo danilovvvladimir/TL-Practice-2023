@@ -4,16 +4,16 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace DatabaseProvider.Configuration
 {
-    public class OrderHasProductConfiguration
+    public class OrderHasProductConfiguration : IEntityTypeConfiguration<OrderHasProduct>
     {
         public void Configure(EntityTypeBuilder<OrderHasProduct> builder)
         {
-            builder.ToTable("OrderHasProduct").HasKey(ohs => ohs.Id);
+            builder.ToTable("OrderHasProduct").HasKey(ohp => ohp.Id);
 
-            builder.Property(ohs => ohs.Quantity).IsRequired();
+            builder.Property(ohp => ohp.Quantity).IsRequired();
 
-            builder.HasOne(ohs => ohs.Order).WithMany().HasForeignKey(ohs => ohs.OrderId).OnDelete(DeleteBehavior.Cascade);
-            builder.HasOne(ohs => ohs.Product).WithMany().HasForeignKey(ohs => ohs.ProductId).OnDelete(DeleteBehavior.Cascade);
+            builder.HasOne(ohp => ohp.Order).WithMany().HasForeignKey(ohp => ohp.OrderId).OnDelete(DeleteBehavior.Cascade);
+            builder.HasOne(ohp => ohp.Product).WithMany().HasForeignKey(ohp => ohp.ProductId).OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
