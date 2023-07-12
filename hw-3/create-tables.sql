@@ -1,32 +1,32 @@
 USE EcommerceDB;
 
 CREATE TABLE [Client] (
-	ClientId int IDENTITY (1,1) CONSTRAINT PK_Client PRIMARY KEY,
-	FirstName nvarchar(50) NOT NULL,
-	LastName nvarchar(50) NOT NULL,
-	Email nvarchar(100) NOT NULL,
-	Address nvarchar(100) NOT NULL,
+	ClientId INT IDENTITY (1,1) CONSTRAINT PK_Client PRIMARY KEY NOT NULL,
+	FirstName NVARCHAR(50) NOT NULL,
+	LastName NVARCHAR(50) NOT NULL,
+	Email NVARCHAR(100) NOT NULL,
+	Address NVARCHAR(100) NOT NULL,
 );
 
 CREATE TABLE [Product] (
-	ProductId int IDENTITY (1,1) CONSTRAINT PK_Product PRIMARY KEY,
-	Name nvarchar(50) NOT NULL,
-	Description nvarchar(100),
-	Price money NOT NULL,
-	Quantity int NOT NULL
+	ProductId INT IDENTITY (1,1) CONSTRAINT PK_Product PRIMARY KEY NOT NULL,
+	Name NVARCHAR(50) NOT NULL,
+	Description NVARCHAR(100),
+	Price MONEY NOT NULL,
+	Quantity INT NOT NULL
 )
 
 CREATE TABLE [OrderStatus] (
-	OrderStatusId int IDENTITY (1,1) CONSTRAINT PK_OrderStatus PRIMARY KEY,
-	Message nvarchar(100) NOT NULL,
+	OrderStatusId INT IDENTITY (1,1) CONSTRAINT PK_OrderStatus PRIMARY KEY NOT NULL,
+	Message NVARCHAR(100) NOT NULL,
 )
 
 CREATE TABLE [Order] (
-	OrderId int IDENTITY (1,1) CONSTRAINT PK_Order PRIMARY KEY,
-	TotalPrice money NOT NULL,
-	Address nvarchar(100) NOT NULL,
-	DeliveryDate date NOT NULL,
-	ClientId int CONSTRAINT FK_Order_ClientId FOREIGN KEY (ClientId) REFERENCES Client(ClientId)
+	OrderId INT IDENTITY (1,1) CONSTRAINT PK_Order PRIMARY KEY NOT NULL,
+	TotalPrice MONEY NOT NULL,
+	Address NVARCHAR(100) NOT NULL,
+	DeliveryDate DATE NOT NULL,
+	ClientId INT CONSTRAINT FK_Order_ClientId FOREIGN KEY (ClientId) REFERENCES Client(ClientId)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE,
 	OrderStatusId int CONSTRAINT FK_Order_OrderStatusId FOREIGN KEY (OrderStatusId) REFERENCES [OrderStatus](OrderStatusId)
@@ -35,12 +35,12 @@ CREATE TABLE [Order] (
 )
 
 CREATE TABLE [OrderHasProduct] (
-    OrderHasProductId int IDENTITY (1,1) CONSTRAINT PK_OrderHasProduct PRIMARY KEY,
-    Quantity int NOT NULL,
-    OrderId int CONSTRAINT FK_OrderProduct_Order FOREIGN KEY (OrderId) REFERENCES [Order](OrderId)
+    OrderHasProductId INT IDENTITY (1,1) CONSTRAINT PK_OrderHasProduct PRIMARY KEY NOT NULL,
+    Quantity INT NOT NULL,
+    OrderId INT CONSTRAINT FK_OrderProduct_Order FOREIGN KEY (OrderId) REFERENCES [Order](OrderId)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE,
-    ProductId int CONSTRAINT FK_OrderProduct_Product FOREIGN KEY (ProductId) REFERENCES Product(ProductId)
+    ProductId INT CONSTRAINT FK_OrderProduct_Product FOREIGN KEY (ProductId) REFERENCES Product(ProductId)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE,
 );

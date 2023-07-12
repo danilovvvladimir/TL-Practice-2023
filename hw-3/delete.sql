@@ -1,4 +1,4 @@
 USE ECommerceDB;
 
-DELETE FROM Client
+DELETE FROM [Client]
 WHERE ClientId = 3;

@@ -6,7 +6,7 @@ JOIN Client ON [Order].ClientId = Client.ClientId;
 
 -- Clients with no orders (using left join)
 SELECT *
-FROM Client
+FROM [Client]
 LEFT JOIN [Order] ON [Order].ClientId = Client.ClientId;
 
 -- Clients with no orders (using right join)

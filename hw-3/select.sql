@@ -1,46 +1,46 @@
 USE ECommerceDB;
 
 SELECT *
-FROM Client;
+FROM [Client];
 
 SELECT *
-FROM Client
+FROM [Client]
 WHERE FirstName = 'Vladimir';
 
 SELECT *
-FROM Product
+FROM [Product]
 WHERE Price > 40000;
 
 SELECT *
-FROM Product
+FROM [Product]
 WHERE Price > 40000 AND Quantity > 5;
 
 SELECT *
-FROM Product
+FROM [Product]
 WHERE Price > 40000 OR Quantity > 15;
 
 SELECT *
-FROM Product
+FROM [Product]
 WHERE Quantity IN (8, 10);
 
 SELECT *
-FROM Product
+FROM [Product]
 WHERE Price BETWEEN 40000 AND 50000;
 
 SELECT *
-FROM Product
+FROM [Product]
 WHERE Price NOT BETWEEN 40000 AND 50000;
 
 SELECT *
-FROM Product
+FROM [Product]
 WHERE Name LIKE 'I%';
 
 SELECT TOP 3 *
-FROM Product
+FROM [Product]
 ORDER BY Price DESC;
 
 SELECT *
-FROM Product
+FROM [Product]
 ORDER BY Price DESC;
 
 SELECT *
