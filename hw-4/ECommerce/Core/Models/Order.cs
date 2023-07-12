@@ -1,11 +1,9 @@
-﻿using System.Data.SqlTypes;
-
-namespace Core.Models
+﻿namespace Core.Models
 {
     public class Order
     {
         public int Id { get; set; }
-        public SqlMoney TotalPrice { get; set; }
+        public decimal TotalPrice { get; set; }
         public DateTime DeliveryDate { get; set; }
 
         public string Address { get; set; }
