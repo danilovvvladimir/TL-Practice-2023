@@ -29,7 +29,7 @@ CREATE TABLE [Order] (
 	ClientId INT CONSTRAINT FK_Order_ClientId FOREIGN KEY (ClientId) REFERENCES Client(ClientId)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE,
-	OrderStatusId int CONSTRAINT FK_Order_OrderStatusId FOREIGN KEY (OrderStatusId) REFERENCES [OrderStatus](OrderStatusId)
+	OrderStatusId INT CONSTRAINT FK_Order_OrderStatusId FOREIGN KEY (OrderStatusId) REFERENCES [OrderStatus](OrderStatusId)
 		ON DELETE CASCADE
 		ON UPDATE CASCADE,
 )
