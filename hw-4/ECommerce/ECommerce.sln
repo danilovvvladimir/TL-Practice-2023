@@ -3,11 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33723.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerce", "ECommerce\ECommerce.csproj", "{67D85D4A-98D5-4429-8D80-48C0A96CD761}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECommerce", "ECommerce\ECommerce.csproj", "{67D85D4A-98D5-4429-8D80-48C0A96CD761}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "Core\Core.csproj", "{CFF9A6D1-D5E3-40C1-A26F-27547B36F8D7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core", "Core\Core.csproj", "{CFF9A6D1-D5E3-40C1-A26F-27547B36F8D7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DatabaseProvider", "DatabaseProvider\DatabaseProvider.csproj", "{92364F2D-730A-4E37-8E20-CA9966507DA5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DatabaseProvider", "DatabaseProvider\DatabaseProvider.csproj", "{92364F2D-730A-4E37-8E20-CA9966507DA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerceMigrations", "ECommerceMigrations\ECommerceMigrations.csproj", "{F7453DFF-2231-459F-AAF5-7336FFA14288}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{92364F2D-730A-4E37-8E20-CA9966507DA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{92364F2D-730A-4E37-8E20-CA9966507DA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{92364F2D-730A-4E37-8E20-CA9966507DA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F7453DFF-2231-459F-AAF5-7336FFA14288}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F7453DFF-2231-459F-AAF5-7336FFA14288}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F7453DFF-2231-459F-AAF5-7336FFA14288}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F7453DFF-2231-459F-AAF5-7336FFA14288}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

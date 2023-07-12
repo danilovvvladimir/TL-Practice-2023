@@ -8,8 +8,6 @@
         public string Email { get; set; }
         public string Address { get; set; }
 
-        public List<Order> Orders { get; set; }
-
         public override string ToString()
         {
             return $"{FirstName} {LastName} ({Email})";
