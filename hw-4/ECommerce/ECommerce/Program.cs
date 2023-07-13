@@ -16,8 +16,7 @@ namespace ECommerce
         private static IProductRepository _productRepository;
         private static IOrderRepository _orderRepository;
         private static IOrderStatusRepository _orderStatusRepository;
-        private static IOrderStatusRepository _orderHasProductRepository;
-
+        private static IOrderHasProductRepository _orderHasProductRepository;
 
         public static void Main(string[] args)
         {
@@ -26,8 +25,7 @@ namespace ECommerce
             _productRepository = new ProductRepository(_applicationContext);
             _orderRepository = new OrderRepository(_applicationContext);
             _orderStatusRepository = new OrderStatusRepository(_applicationContext);
-            _orderHasProductRepository = new OrderStatusRepository(_applicationContext);
-
+            _orderHasProductRepository = new OrderHasProductRepository(_applicationContext);
 
             ProcessCommands();
         }
@@ -97,10 +95,10 @@ namespace ECommerce
                     case "get-order-by-id":
                         GetOrderById(parameters);
                         break;
-                    case "get-order-by-client-id":
+                    case "get-orders-by-client-id":
                         GetProductByClientId(parameters);
                         break;
-                    case "get-order-by-status-id":
+                    case "get-orders-by-status-id":
                         GetOrderByOrderStatusId(parameters);
                         break;
                     // OrderStatus
@@ -129,13 +127,13 @@ namespace ECommerce
                     case "get-ohp-by-id":
                         GetOHPById(parameters);
                         break;
-                    case "get-ohp-by-client-id":
+                    case "get-ohps-by-client-id":
                         GetOHPByClientId(parameters);
                         break;
-                    case "get-ohp-by-product-id":
+                    case "get-ohps-by-product-id":
                         GetOHPByProductId(parameters);
                         break;
-                    case "get-ohp-by-order-id":
+                    case "get-ohps-by-order-id":
                         GetOHPByOrderId(parameters);
                         break;
                     default:
@@ -181,8 +179,8 @@ namespace ECommerce
             Console.WriteLine("- delete-order <order-id>");
             Console.WriteLine("- get-all-orders");
             Console.WriteLine("- get-order-by-id <order-id>");
-            Console.WriteLine("- get-order-by-client-id <client-id>");
-            Console.WriteLine("- get-order-by-order-status-id <order-status-id>");
+            Console.WriteLine("- get-orders-by-client-id <client-id>");
+            Console.WriteLine("- get-orders-by-order-status-id <order-status-id>");
 
             Console.WriteLine("OrderHasProduct (ohp):");
             Console.WriteLine("" +
@@ -190,9 +188,9 @@ namespace ECommerce
             Console.WriteLine("- delete-ohp <ohp-id>");
             Console.WriteLine("- get-all-ohps");
             Console.WriteLine("- get-ohp-by-id <ohp-id>");
-            Console.WriteLine("- get-ohp-by-client-id <client-id>");
-            Console.WriteLine("- get-ohp-by-order-id <order-id>");
-            Console.WriteLine("- get-ohp-by-product-id <product-id>");
+            Console.WriteLine("- get-ohps-by-client-id <client-id>");
+            Console.WriteLine("- get-ohps-by-order-id <order-id>");
+            Console.WriteLine("- get-ohps-by-product-id <product-id>");
         }
 
         // Client Methods
@@ -353,5 +351,253 @@ namespace ECommerce
         }
 
         // Order Methods
+
+        public static void AddOrder(List<string> parameters)
+        {
+            Order order = new Order
+            {
+                TotalPrice = Decimal.Parse(parameters[0]),
+                DeliveryDate = DateTime.Parse(parameters[1]),
+                Address = parameters[2],
+                ClientId = int.Parse(parameters[3]),
+                Client = _clientRepository.GetById(int.Parse(parameters[3])),
+                OrderStatusId = int.Parse(parameters[4]),
+                OrderStatus = _orderStatusRepository.GetById(int.Parse(parameters[4])),
+            };
+
+            _orderRepository.Add(order);
+            _orderRepository.SaveChanges();
+        }
+
+        public static void GetAllOrders()
+        {
+            List<Order> orderList = _orderRepository.GetAll();
+
+            if (orderList.Count == 0)
+            {
+                Console.WriteLine("There are no orders yet.");
+            }
+
+            foreach (Order order in orderList)
+            {
+                Console.WriteLine(order);
+            }
+        }
+
+        public static void GetOrderById(List<string> parameters)
+        {
+            int orderId = int.Parse(parameters[0]);
+            Order order = _orderRepository.GetById(orderId);
+
+            if (order == null)
+            {
+                Console.WriteLine("Order with this ID is not found.");
+                return;
+            }
+
+            Console.WriteLine(order);
+        }
+
+        public static void GetOrderByOrderStatusId(List<string> parameters)
+        {
+            int orderStatusId = int.Parse(parameters[0]);
+
+            List<Order> orderList = _orderRepository.GetByOrderStatusId(orderStatusId);
+
+            if (orderList.Count == 0)
+            {
+                Console.WriteLine("Orders with this status are not found.");
+                return;
+            }
+
+            foreach (Order order in orderList)
+            {
+                Console.WriteLine(order);
+            }
+        }
+
+        public static void GetProductByClientId(List<string> parameters)
+        {
+            int clientId = int.Parse(parameters[0]);
+
+            List<Order> orderList = _orderRepository.GetByClientId(clientId);
+
+            if (orderList.Count == 0)
+            {
+                Console.WriteLine("Orders with this client are not found.");
+                return;
+            }
+
+            foreach (Order order in orderList)
+            {
+                Console.WriteLine(order);
+            }
+        }
+
+        public static void DeleteOrder(List<string> parameters)
+        {
+            int orderId = int.Parse(parameters[0]);
+            Order order = _orderRepository.GetById(orderId);
+            _orderRepository.Remove(order);
+            _orderRepository.SaveChanges();
+        }
+
+        // OrderStatus Methods
+
+        public static void AddOrderStatus(List<string> parameters)
+        {
+            OrderStatus orderStatus = new OrderStatus
+            {
+                Message = parameters[0],
+            };
+
+            _orderStatusRepository.Add(orderStatus);
+            _orderStatusRepository.SaveChanges();
+        }
+
+        public static void GetAllOrderStatuses()
+        {
+            List<OrderStatus> orderStatusList = _orderStatusRepository.GetAll();
+
+            if (orderStatusList.Count == 0)
+            {
+                Console.WriteLine("There are no order-statuses yet.");
+            }
+
+            foreach (OrderStatus orderStatus in orderStatusList)
+            {
+                Console.WriteLine(orderStatus);
+            }
+        }
+
+        public static void GetOrderStatusById(List<string> parameters)
+        {
+            int orderStatusId = int.Parse(parameters[0]);
+            OrderStatus orderStatus = _orderStatusRepository.GetById(orderStatusId);
+
+            if (orderStatus == null)
+            {
+                Console.WriteLine("Order-Status with this ID is not found.");
+                return;
+            }
+
+            Console.WriteLine(orderStatus);
+        }
+
+        public static void DeleteOrderStatus(List<string> parameters)
+        {
+            int orderStatusId = int.Parse(parameters[0]);
+            OrderStatus orderStatus = _orderStatusRepository.GetById(orderStatusId);
+            _orderStatusRepository.Remove(orderStatus);
+            _orderStatusRepository.SaveChanges();
+        }
+
+        // OrderHasProduct Methods
+
+        public static void AddOHP(List<string> parameters)
+        {
+            OrderHasProduct ohp = new OrderHasProduct
+            {
+                Quantity = int.Parse(parameters[0]),
+                ProductId = int.Parse(parameters[1]),
+                Product = _productRepository.GetById(int.Parse(parameters[1])),
+                OrderId = int.Parse(parameters[2]),
+                Order = _orderRepository.GetById(int.Parse(parameters[2])),
+            };
+
+            _orderHasProductRepository.Add(ohp);
+            _orderHasProductRepository.SaveChanges();
+        }
+
+        public static void GetAllOHPs()
+        {
+            List<OrderHasProduct> ohpList = _orderHasProductRepository.GetAll();
+
+            if (ohpList.Count == 0)
+            {
+                Console.WriteLine("There are no order-has-product yet.");
+            }
+
+            foreach (OrderHasProduct ohp in ohpList)
+            {
+                Console.WriteLine(ohp);
+            }
+        }
+
+        public static void GetOHPById(List<string> parameters)
+        {
+            int ohpId = int.Parse(parameters[0]);
+            OrderHasProduct ohp = _orderHasProductRepository.GetById(ohpId);
+
+            if (ohp == null)
+            {
+                Console.WriteLine("Order-has-product with this ID is not found.");
+                return;
+            }
+
+            Console.WriteLine(ohp);
+        }
+
+        public static void GetOHPByOrderId(List<string> parameters)
+        {
+            int orderId = int.Parse(parameters[0]);
+
+            List<OrderHasProduct> ohpList = _orderHasProductRepository.GetByOrderId(orderId);
+
+            if (ohpList.Count == 0)
+            {
+                Console.WriteLine("Order-has-product's with this order are not found.");
+                return;
+            }
+
+            foreach (OrderHasProduct ohp in ohpList)
+            {
+                Console.WriteLine(ohp);
+            }
+        }
+
+        public static void GetOHPByProductId(List<string> parameters)
+        {
+            int productId = int.Parse(parameters[0]);
+
+            List<OrderHasProduct> ohpList = _orderHasProductRepository.GetByProductId(productId);
+
+            if (ohpList.Count == 0)
+            {
+                Console.WriteLine("Order-has-product's with this product are not found.");
+                return;
+            }
+
+            foreach (OrderHasProduct ohp in ohpList)
+            {
+                Console.WriteLine(ohp);
+            }
+        }
+
+        public static void GetOHPByClientId(List<string> parameters)
+        {
+            int clientId = int.Parse(parameters[0]);
+
+            List<OrderHasProduct> ohpList = _orderHasProductRepository.GetByClientId(clientId);
+
+            if (ohpList.Count == 0)
+            {
+                Console.WriteLine("Order-has-product's with this client are not found.");
+                return;
+            }
+
+            foreach (OrderHasProduct ohp in ohpList)
+            {
+                Console.WriteLine(ohp);
+            }
+        }
+
+        public static void DeleteOHP(List<string> parameters)
+        {
+            int ohpId = int.Parse(parameters[0]);
+            OrderHasProduct ohp = _orderHasProductRepository.GetById(ohpId);
+            _orderHasProductRepository.Remove(ohp);
+            _orderHasProductRepository.SaveChanges();
+        }
     }
 }
