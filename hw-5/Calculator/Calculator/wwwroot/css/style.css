@@ -141,3 +141,10 @@ body {
 .table__cell--result {
     border-top-color: #6b6969;
 }
+
+.table__cell--plus {
+    font-size: 14px;
+    vertical-align: bottom;
+    border: none;
+
+}
