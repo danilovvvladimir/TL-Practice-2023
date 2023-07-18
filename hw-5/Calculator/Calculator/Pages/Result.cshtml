@@ -11,7 +11,74 @@
                 <h1 class="title">Результат:</h1>
             </div>
             <div class="result__solution">
-                @Model.Result
+                <table class="table">
+                    <tbody class="table__tbody">
+                        <tr class="table__row">
+                            <td rowspan="2" class="table__cell">
+                                @Model.Operation
+                            </td>
+                            @if (Model.FirstNumberDigits.Count < Model.SecondNumberDigits.Count)
+                            {
+                                @for (int i = 0; i < Model.SecondNumberDigits.Count - Model.FirstNumberDigits.Count; i++)
+                                {
+                                    <td class="table__cell"></td>
+                                }
+                            }
+                            @foreach (var digit in Model.FirstNumberDigits)
+                            {
+                                <td class="table__cell">@digit</td>
+                            }
+                        </tr>
+                        <tr class="table__row">
+                            @if (Model.SecondNumberDigits.Count < Model.FirstNumberDigits.Count)
+                            {
+                                @for (int i = 0; i < Model.FirstNumberDigits.Count - Model.SecondNumberDigits.Count; i++)
+                                {
+                                    <td class="table__cell"></td>
+                                }
+                            }
+                            @foreach (var digit in Model.SecondNumberDigits)
+                            {
+                                <td class="table__cell">@digit</td>
+                            }
+                        </tr>
+                        <tr class="table__row">
+                            @if (Model.Operation == "+")
+                            {
+                                @if (Model.ResultDigits.Count >= Model.FirstNumberDigits.Count &&
+                               Model.ResultDigits.Count >= Model.SecondNumberDigits.Count)
+                                {
+                                    <td class="table__cell table__cell--result"></td>
+                                }
+                            }
+
+                            @if (Model.Operation == "-")
+                            {
+                                {
+                                    @if (Model.IsMinus)
+                                    {
+                                        <td class="table__cell table__cell--result">-</td>
+                                    }
+                                    else
+                                    {
+                                        <td class="table__cell table__cell--result"></td>
+                                    }
+
+
+                                    @for (int i = 0; i < (Math.Max(Model.FirstNumberDigits.Count, Model.SecondNumberDigits.Count)) - Model.ResultDigits.Count; i++)
+                                    {
+                                        <td class="table__cell table__cell--result"></td>
+                                    }
+                                }
+                            }
+
+                            @foreach (var digit in Model.ResultDigits)
+                            {
+                                <td class="table__cell table__cell--result">@digit</td>
+                            }
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
     </div>

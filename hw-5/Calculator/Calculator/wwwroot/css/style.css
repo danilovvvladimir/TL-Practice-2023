@@ -94,7 +94,50 @@ body {
     background-color: var(--accent-hover-color);
 }
 
-.result__wrapper {
+.result__solution {
+    display: flex;
+    justify-content: center;
     background-color: #fff;
+    width: 500px;
+    margin: 0 auto;
+    padding: 20px;
     border-radius: 10px;
+    box-shadow: 20px 20px 30px rgb(0 0 0 / 10%);
+}
+
+.table {
+    display: table;
+    border-collapse: separate;
+    box-sizing: border-box;
+    text-indent: initial;
+    border-spacing: 0;
+    border-color: grey;
+}
+
+
+.table__row {
+    display: table-row;
+    vertical-align: inherit;
+    border-color: inherit;
+
+}
+.table__tbody {
+    display: table-row-group;
+    vertical-align: middle;
+    border-color: inherit;
+}
+
+.table__cell {
+    border: 1px solid #e0e0e0;
+    color: var(--title-color);
+    height: 30px;
+    font-size: 20px;
+    width: 30px;
+    vertical-align: middle;
+    text-align: center;
+    padding: 0px;
+}
+
+.table__cell--result {
+    border-top-color: #6b6969;
 }
