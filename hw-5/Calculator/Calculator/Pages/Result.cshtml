@@ -1,0 +1,18 @@
+﻿@page
+@model ResultModel
+@{
+    ViewData["Title"] = "Result page";
+}
+
+<section class="result">
+    <div class="container">
+        <div class="wrapper result__wrapper">
+            <div class="title-box">
+                <h1 class="title">Результат:</h1>
+            </div>
+            <div class="result__solution">
+                @Model.Result
+            </div>
+        </div>
+    </div>
+</section>

@@ -1,0 +1,38 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<section class="home">
+    <div class="container">
+        <div class="wrapper home__wrapper">
+            <div class="title-box">
+                <h1 class="title">Калькулятор</h1>
+            </div>
+            <form class="form" method="post">
+                <label class="form__label">
+                    Первое число:
+                    <input type="number" class="form__input" name="firstNumber" />
+                </label>
+                <label class="form__label">
+                    Второе число:
+                    <input type="number" class="form__input" name="secondNumber" />
+                </label>
+
+                <label class="form__label">
+                    Действие:
+                    <select class="form__select" name="operation">
+                        <option value="+">+</option>
+                        <option value="-">-</option>
+                        <option value="*">*</option>
+                        <option value="/">/</option>
+                    </select>
+                </label>
+
+                <button type="submit" class="form__button">=</button>
+            </form>
+        </div>
+    </div>
+</section>
+
