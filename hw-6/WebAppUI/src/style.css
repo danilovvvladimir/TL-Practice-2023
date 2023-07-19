@@ -129,6 +129,10 @@ body {
   gap: 16px;
 }
 
-.swagger__tab-input {
+.swagger__tab-label {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
   margin-bottom: 16px;
 }
+
