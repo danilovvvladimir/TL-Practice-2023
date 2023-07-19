@@ -14,7 +14,7 @@
 
 ### Сложение - default case
 
-Вводные данные:
+Входные данные:
 
 ![default_plus](./ReadMeFiles/default_plus.jpg)
 
@@ -24,7 +24,7 @@
 
 ### Сложение - complex case
 
-Вводные данные:
+Входные данные:
 
 ![complex_plus](./ReadMeFiles/complex_plus.jpg)
 
@@ -34,7 +34,7 @@
 
 ### Вычитание - default case
 
-Вводные данные:
+Входные данные:
 
 ![default_minus](./ReadMeFiles/default_minus.jpg)
 
@@ -44,7 +44,7 @@
 
 ### Вычитание - complex case
 
-Вводные данные:
+Входные данные:
 
 ![comples_minus](./ReadMeFiles/complex_minus.jpg)
 
