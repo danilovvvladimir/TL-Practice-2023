@@ -4,10 +4,97 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <title>Swagger 2.0</title>
   </head>
   <body>
-    <div>Hello, world!</div>
+    <main>
+      <section class="swagger">
+        <div class="container">
+          <div class="swagger__wrapper">
+            <h1 class="title swagger__title">API HANDLER</h1>
+            <div class="swagger__content">
+              <div class="swagger__tab swagger__tab--get">
+                <div class="swagger__tab-info">
+                  <div class="swagger__tab-left">
+                    <button class="btn btn--get swagger__tab-btn" id="get-all">GET</button>
+                    <div class="swagger__tab-url">/users</div>
+                  </div>
+                  <div class="swagger__tab-right">
+                    <div class="swagger__tab-description">Get All Users</div>
+                  </div>
+                </div>
+                <div class="swagger__tab-content">
+                  Lorem ipsum dolor sit amet, consectetur adipisicing elit. Illum, suscipit consequuntur soluta adipisci
+                  sunt odio molestias modi voluptates ratione, mollitia rerum vero dolor pariatur voluptatum non
+                </div>
+              </div>
+
+              <div class="swagger__tab swagger__tab--get">
+                <div class="swagger__tab-info">
+                  <div class="swagger__tab-left">
+                    <button class="btn btn--get swagger__tab-btn" id="get">GET</button>
+                    <div class="swagger__tab-url">/users/id</div>
+                  </div>
+                  <div class="swagger__tab-right">
+                    <div class="swagger__tab-description">Get user by id</div>
+                  </div>
+                </div>
+                <div class="swagger__tab-content">
+                  <input class="input swagger__tab-input" placeholder="Write here UserId..." />
+                </div>
+              </div>
+
+              <div class="swagger__tab swagger__tab--post">
+                <div class="swagger__tab-info">
+                  <div class="swagger__tab-left">
+                    <button class="btn btn--post swagger__tab-btn" id="create">POST</button>
+                    <div class="swagger__tab-url">/users</div>
+                  </div>
+                  <div class="swagger__tab-right">
+                    <div class="swagger__tab-description">Create new user</div>
+                  </div>
+                </div>
+                <div class="swagger__tab-content">
+                  <textarea class="textarea"></textarea>
+                </div>
+              </div>
+
+              <div class="swagger__tab swagger__tab--delete">
+                <div class="swagger__tab-info">
+                  <div class="swagger__tab-left">
+                    <button class="btn btn--delete swagger__tab-btn" id="delete">DELETE</button>
+                    <div class="swagger__tab-url">/users/id</div>
+                  </div>
+                  <div class="swagger__tab-right">
+                    <div class="swagger__tab-description">Delete user by id</div>
+                  </div>
+                </div>
+                <div class="swagger__tab-content">
+                  <input class="input swagger__tab-input" placeholder="Write here UserId..." />
+                </div>
+              </div>
+
+              <div class="swagger__tab swagger__tab--put">
+                <div class="swagger__tab-info">
+                  <div class="swagger__tab-left">
+                    <button class="btn btn--put swagger__tab-btn" id="update">PUT</button>
+                    <div class="swagger__tab-url">/users/id</div>
+                  </div>
+                  <div class="swagger__tab-right">
+                    <div class="swagger__tab-description">Update user by id</div>
+                  </div>
+                </div>
+                <div class="swagger__tab-content">
+                  <input class="input swagger__tab-input" placeholder="Write here UserId..." />
+                  <textarea class="textarea"></textarea>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
     <script type="module" src="/main.js"></script>
   </body>
 </html>
+

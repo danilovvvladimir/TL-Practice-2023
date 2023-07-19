@@ -56,17 +56,45 @@ const deleteUser = async id => {
   return response.json();
 };
 
-/*
- * ===== Click Handlers Functions =====
- * вызов соответствующей фетч функции, рендер на основе пришедших данных (создание нод)
- *
- */
+// ===== Click Handlers Functions =====
+
+const handleGetAllUsers = async event => {
+  console.log(await getAllUsers());
+};
+
+const handleGetUser = event => {
+  console.log(event);
+};
+
+const handleCreateUser = event => {
+  console.log(event);
+};
+
+const handleDeleteUser = event => {
+  console.log(event);
+};
+
+const handleUpdateUser = event => {
+  console.log(event);
+};
 
 // ===== Get Elements =====
+
+const getAllUsersBtn = document.querySelector("#get-all");
+const getUserBtn = document.querySelector("#get");
+const createUserBtn = document.querySelector("#create");
+const deleteUserBtn = document.querySelector("#delete");
+const updateUserBtn = document.querySelector("#update");
 
 //
 
 // ===== Add Events =====
+
+getAllUsersBtn.addEventListener("click", handleGetAllUsers);
+getUserBtn.addEventListener("click", handleGetUser);
+createUserBtn.addEventListener("click", handleCreateUser);
+deleteUserBtn.addEventListener("click", handleDeleteUser);
+updateUserBtn.addEventListener("click", handleUpdateUser);
 
 //
 

@@ -1,3 +1,134 @@
+:root {
+  --get-color: #ebf3fb;
+  --get-accent-color: #61affe;
+  --delete-color: #fae7e7;
+  --delete-accent-color: #f93e3e;
+  --post-color: #e8f6f0;
+  --post-accent-color: #49cc90;
+  --put-color: #fbf1e6;
+  --put-accent-color: #fca130;
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 body {
-  background-color: pink;
+  font-family: sans-serif;
+  font-size: 16px;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 15px;
+}
+
+.btn {
+  width: 100px;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  border-radius: 10px;
+  font-weight: 800;
+  color: #fff;
+}
+
+.input {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 8px 12px;
+}
+
+.textarea {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: none;
+  height: 200px;
+  width: 100%;
+  padding: 8px 12px;
+}
+
+.btn--get {
+  background-color: var(--get-accent-color);
+}
+.btn--post {
+  background-color: var(--post-accent-color);
+}
+.btn--delete {
+  background-color: var(--delete-accent-color);
+}
+.btn--put {
+  background-color: var(--put-accent-color);
+}
+
+.swagger {
+  height: auto;
+  background-color: #ebf3fb;
+  padding: 32px 0;
+}
+
+.swagger__wrapper {
+  margin: 0 auto;
+  width: 800px;
+  background-color: #fff;
+  box-shadow: 20px 20px 30px rgb(0 0 0 / 20%);
+  border-radius: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.swagger__content {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.swagger__title {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.swagger__tab {
+  padding: 10px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.swagger__tab-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.swagger__tab-url {
+  font-weight: 600;
+}
+
+.swagger__tab--get {
+  background-color: var(--get-color);
+}
+.swagger__tab--post {
+  background-color: var(--post-color);
+}
+.swagger__tab--delete {
+  background-color: var(--delete-color);
+}
+.swagger__tab--put {
+  background-color: var(--put-color);
+}
+
+.swagger__tab-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.swagger__tab-input {
+  margin-bottom: 16px;
 }
