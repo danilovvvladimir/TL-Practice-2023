@@ -79,11 +79,18 @@ namespace Calculator.Pages
         public List<int> GetDigits(int number)
         {
             List<int> digits = new List<int>();
+
+            if (number == 0)
+            {
+                digits.Add(number);
+            }
+
             while (number != 0)
             {
                 digits.Add(number % 10);
                 number /= 10;
             }
+
             digits.Reverse();
             return digits;
         }
@@ -92,20 +99,20 @@ namespace Calculator.Pages
         {
             List<int> indexes = new List<int>();
 
-            List<int> BiggestDigitsReversed = new List<int>(FirstNumberDigits.Count > SecondNumberDigits.Count ? FirstNumberDigits : SecondNumberDigits);
-            BiggestDigitsReversed.Reverse();
+            List<int> biggestDigitsReversed = new List<int>(FirstNumberDigits.Count > SecondNumberDigits.Count ? FirstNumberDigits : SecondNumberDigits);
+            biggestDigitsReversed.Reverse();
 
-            List<int> SmallestDigitsReversed = new List<int>(FirstNumberDigits.Count < SecondNumberDigits.Count ? FirstNumberDigits : SecondNumberDigits);
-            SmallestDigitsReversed.Reverse();
+            List<int> smallestDigitsReversed = new List<int>(FirstNumberDigits.Count < SecondNumberDigits.Count ? FirstNumberDigits : SecondNumberDigits);
+            smallestDigitsReversed.Reverse();
 
-            int maxSize = BiggestDigitsReversed.Count;
-            int minSize = SmallestDigitsReversed.Count;
+            int maxSize = biggestDigitsReversed.Count;
+            int minSize = smallestDigitsReversed.Count;
 
-            for (int i = 0; i < BiggestDigitsReversed.Count; i++)
+            for (int i = 0; i < biggestDigitsReversed.Count; i++)
             {
                 if (i < minSize)
                 {
-                    if (BiggestDigitsReversed[i] + SmallestDigitsReversed[i] >= 10 ||
+                    if (biggestDigitsReversed[i] + smallestDigitsReversed[i] >= 10 ||
                         indexes.Count != 0 && (indexes[indexes.Count - 1] == maxSize - i - 1))
                     {
                         indexes.Add(maxSize - 2 - i);
@@ -115,7 +122,7 @@ namespace Calculator.Pages
                 {
                     if (indexes.Count != 0 && (indexes[indexes.Count - 1] == maxSize - i - 1))
                     {
-                        if (BiggestDigitsReversed[i] + 1 >= 10)
+                        if (biggestDigitsReversed[i] + 1 >= 10)
                         {
                             indexes.Add(maxSize - 2 - i);
                         }
@@ -128,14 +135,14 @@ namespace Calculator.Pages
 
         public (List<int>, List<int>) GetMinusIndexes()
         {
-            List<int> DotsIndexes = new List<int>();
-            List<int> TensIndexes = new List<int>();
+            List<int> dotsIndexes = new List<int>();
+            List<int> tensIndexes = new List<int>();
 
-            List<int> FirstNumberDigitsReversed = new List<int>(FirstNumberDigits);
-            FirstNumberDigitsReversed.Reverse();
+            List<int> firstNumberDigitsReversed = new List<int>(FirstNumberDigits);
+            firstNumberDigitsReversed.Reverse();
 
-            List<int> SecondNumberDigitsReversed = new List<int>(SecondNumberDigits);
-            SecondNumberDigitsReversed.Reverse();
+            List<int> secondNumberDigitsReversed = new List<int>(SecondNumberDigits);
+            secondNumberDigitsReversed.Reverse();
 
             int maxSize = Math.Max(FirstNumberDigits.Count, SecondNumberDigits.Count);
             int minSize = Math.Min(FirstNumberDigits.Count, SecondNumberDigits.Count);
@@ -144,7 +151,7 @@ namespace Calculator.Pages
             {
                 if (i < minSize)
                 {
-                    if (FirstNumberDigitsReversed[i] - SecondNumberDigitsReversed[i] < 0)
+                    if (firstNumberDigitsReversed[i] - secondNumberDigitsReversed[i] < 0)
                     {
                         DotsIndexes.Add(maxSize - 2 - i);
                         TensIndexes.Add(maxSize - 1 - i);
@@ -152,9 +159,9 @@ namespace Calculator.Pages
                 }
                 else
                 {
-                    if (DotsIndexes.Count != 0 && (DotsIndexes[DotsIndexes.Count - 1] == maxSize - i - 1))
+                    if (dotsIndexes.Count != 0 && (dotsIndexes[dotsIndexes.Count - 1] == maxSize - i - 1))
                     {
-                        if (FirstNumberDigitsReversed[i] - 1 < 0)
+                        if (firstNumberDigitsReversed[i] - 1 < 0)
                         {
                             DotsIndexes.Add(maxSize - 2 - i);
                             TensIndexes.Add(maxSize - 1 - i);
@@ -163,7 +170,7 @@ namespace Calculator.Pages
                 }
             }
 
-            return (DotsIndexes, TensIndexes);
+            return (dotsIndexes, tensIndexes);
         }
     }
 }
