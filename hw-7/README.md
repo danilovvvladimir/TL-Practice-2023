@@ -10,7 +10,7 @@
 
 После отправки:
 
-![design](./ReadMeFiles/before_sending.jpg)
+![design](./ReadMeFiles/after_sending.jpg)
 
 ### Сделал форму готовой к масштабируемости.
 
