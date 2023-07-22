@@ -1,0 +1,59 @@
+.reply__form {
+  width: 400px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  padding-bottom: 40px;
+}
+
+.reply__form::after {
+  content: "";
+  position: absolute;
+  width: 100%;
+  height: 2px;
+  background: #dcdcdc;
+  bottom: 0;
+}
+
+.reply__form-textarea {
+  resize: none;
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 5px;
+  border: 1px solid #dcdcdc;
+  padding: 10px 15px;
+  min-height: 100px;
+  margin-bottom: 12px;
+}
+
+.reply__form-button {
+  width: 120px;
+  align-self: flex-end;
+}
+
+.reply__form-skills {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: flex-start;
+  /* align-items: center; */
+  margin-bottom: 50px;
+  gap: 45px;
+  margin-bottom: 32px;
+}
+
+.reply__form-range-input {
+  width: 205px;
+  cursor: pointer;
+}
+
+.reply__form-label {
+  display: flex;
+  font-size: 16px;
+  /* justify-content: flex-start; */
+  gap: 15px;
+  /* align-items: center; */
+}
