@@ -18,7 +18,7 @@
 .reply__form::after {
   content: "";
   position: absolute;
-  width: 100%;
+  width: 620px;
   height: 2px;
   background: #dcdcdc;
   bottom: 0;

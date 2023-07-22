@@ -24,6 +24,7 @@ input[type="range"].rinput::-webkit-slider-runnable-track {
   height: 6px;
   background-color: transparent;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 input[type="range"].rinput::-moz-range-track {
@@ -31,6 +32,7 @@ input[type="range"].rinput::-moz-range-track {
   height: 6px;
   background-color: transparent;
   border-radius: 5px;
+  cursor: pointer;
 }
 
 input[type="range"].rinput::-webkit-slider-thumb {
@@ -72,6 +74,7 @@ input[type="range"].rinput::-moz-range-thumb {
   border-radius: 50%;
   background-color: #fff;
   border: 2px solid #dcdcdc;
+  cursor: pointer;
 }
 
 .progress-dot.active {

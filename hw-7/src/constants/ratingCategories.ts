@@ -6,4 +6,5 @@ export const ratingCategories: Category[] = [
   { key: "speed", label: "Speed" },
   { key: "location", label: "Location" },
   { key: "facilities", label: "Facilities" },
+  { key: "smth", label: "smth" },
 ];
