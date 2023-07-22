@@ -1,0 +1,97 @@
+.range-input__container {
+  width: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  position: relative;
+}
+
+input[type="range"].rinput {
+  width: 100%;
+  -webkit-appearance: none;
+  background-color: transparent;
+  height: 10px;
+  border-radius: 5px;
+  outline: none;
+  margin: 10px 0;
+  position: relative;
+  z-index: 1;
+}
+
+input[type="range"].rinput::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 6px;
+  background-color: transparent;
+  border-radius: 5px;
+}
+
+input[type="range"].rinput::-moz-range-track {
+  width: 100%;
+  height: 6px;
+  background-color: transparent;
+  border-radius: 5px;
+}
+
+input[type="range"].rinput::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #1e64b7;
+  border: 2px solid #dcdcdc;
+  cursor: pointer;
+  position: relative;
+  top: -5px;
+}
+
+input[type="range"].rinput::-moz-range-thumb {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #1e64b7;
+  border: 2px solid #dcdcdc;
+  cursor: pointer;
+  position: relative;
+  top: -5px;
+}
+
+.progress-dots-container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  position: absolute;
+  top: 7px;
+  z-index: 2;
+  pointer-events: none;
+}
+
+.progress-dot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background-color: #fff;
+  border: 2px solid #dcdcdc;
+}
+
+.progress-dot.active {
+  background-color: #1e64b7;
+}
+
+.filled-track {
+  position: absolute;
+  top: 5;
+  left: 0;
+  height: 6px;
+  background-color: #1e64b7;
+  border-radius: 5px;
+}
+
+.unfilled-track {
+  position: absolute;
+  top: 5;
+  right: 0;
+  height: 6px;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+}

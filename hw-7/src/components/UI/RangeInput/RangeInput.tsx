@@ -6,12 +6,35 @@ import { FC, InputHTMLAttributes } from "react";
 // ==> Other imports <===
 import "./RangeInput.css";
 
-interface RangeInputProps extends InputHTMLAttributes<HTMLInputElement> {}
+interface CustomRangeInputProps extends InputHTMLAttributes<HTMLInputElement> {
+  min: number;
+  max: number;
+  step?: number;
+  value: number;
+}
 
-const RangeInput: FC<RangeInputProps> = ({ className, ...props }) => {
-  const finalClassName = className ? `range-input ${className}` : "range-input";
-
-  return <input className={finalClassName} type="range" {...props} />;
+const CustomRangeInput: FC<CustomRangeInputProps> = ({ min, max, step = 1, ...props }) => {
+  return (
+    <div className="range-input__container">
+      <div className="filled-track" style={{ width: `${((props.value - min) / (max - min)) * 100}%` }} />
+      <div className="unfilled-track" style={{ width: `${100 - ((props.value - min) / (max - min)) * 100}%` }} />
+      <input
+        className="rinput"
+        type="range"
+        name={props.name}
+        min={min}
+        max={max}
+        step={step}
+        value={props.value}
+        onChange={props.onChange}
+      />
+      <div className="progress-dots-container">
+        {Array.from({ length: (max - min) / step + 1 }, (_, index) => (
+          <div key={index} className={`progress-dot ${index + 1 * step <= props.value ? "active" : ""}`} />
+        ))}
+      </div>
+    </div>
+  );
 };
 
-export default RangeInput;
+export default CustomRangeInput;
