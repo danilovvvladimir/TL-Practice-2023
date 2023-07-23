@@ -1,6 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
 :root {
   --title-color: #404040;
+  --accent-color: #1e64b7;
+  --accent-active-color: #0b51a3;
+  --border-color: #dcdcdc;
 }
 
 body {

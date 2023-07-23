@@ -15,11 +15,11 @@ interface CustomRangeInputProps extends InputHTMLAttributes<HTMLInputElement> {
 
 const CustomRangeInput: FC<CustomRangeInputProps> = ({ min, max, step = 1, ...props }) => {
   return (
-    <div className="range-input__container">
+    <div className="range-input-container">
       <div className="filled-track" style={{ width: `${((props.value - min) / (max - min)) * 100}%` }} />
       <div className="unfilled-track" style={{ width: `${100 - ((props.value - min) / (max - min)) * 100}%` }} />
       <input
-        className="rinput"
+        className="range-input"
         type="range"
         name={props.name}
         min={min}
