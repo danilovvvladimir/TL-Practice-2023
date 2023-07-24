@@ -7,9 +7,9 @@ import Button from "../UI/Button/Button";
 
 // ==> Other imports <===
 import "./Form.css";
-import { Rating } from "../../types/formTypes";
+import { Rating } from "../../types/form";
 import { ratingCategories } from "../../constants/ratingCategories";
-import { ReviewsContext } from "../../App";
+import { ReviewsContext } from "../../context/context";
 import { calculateTotalRating } from "../../utils/calculateTotalRating";
 
 const initialRatingState: Rating = ratingCategories.reduce(

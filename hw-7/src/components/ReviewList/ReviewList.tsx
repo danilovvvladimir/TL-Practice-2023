@@ -6,7 +6,7 @@ import SingleReview from "../SingleReview/SingleReview";
 
 // ==> Other imports <===
 import "./ReviewList.css";
-import { ReviewsContext } from "../../App";
+import { ReviewsContext } from "../../context/context";
 
 const ReviewList: FC = () => {
   const { reviews } = useContext(ReviewsContext);

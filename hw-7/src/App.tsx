@@ -1,43 +1,26 @@
 // ==> Libs imports <===
-import { FC, createContext, useState } from "react";
+import { FC, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 // ==> Components imports <===
-import Form from "./components/Form/Form";
-import ReviewList from "./components/ReviewList/ReviewList";
+import Reply from "./components/Reply/Reply";
 
 // ==> Other imports <===
-import { Review } from "./types/reviewsTypes";
+import { NewReview, Review } from "./types/review";
+import { ReviewsContext } from "./context/context";
 
-type ReviewsContextType = {
-  reviews: Review[];
-  addReview: (review: Omit<Review, "id">) => void;
-};
-
-export const ReviewsContext = createContext<ReviewsContextType>({
-  reviews: [],
-  addReview: () => {},
-});
 const App: FC = () => {
   const [reviews, setReviews] = useState<Review[]>([]);
 
-  const addReview = ({ text, rating }: Omit<Review, "id">) => {
-    const newId = reviews.length > 0 ? reviews[reviews.length - 1].id + 1 : 1;
-    const newReview = { text, rating, id: newId };
+  const addReview = ({ text, rating }: NewReview) => {
+    const newReview = { text, rating, id: uuidv4() };
 
     setReviews([...reviews, newReview]);
   };
 
   return (
     <ReviewsContext.Provider value={{ reviews, addReview }}>
-      <section className="reply">
-        <div className="container">
-          <div className="reply__wrapper">
-            <h1 className="title reply__title">How nice was my reply?</h1>
-            <Form />
-            <ReviewList />
-          </div>
-        </div>
-      </section>
+      <Reply />
     </ReviewsContext.Provider>
   );
 };

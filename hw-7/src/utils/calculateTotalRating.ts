@@ -1,4 +1,4 @@
-import { Rating } from "../types/formTypes";
+import { Rating } from "../types/form";
 
 export const calculateTotalRating = (rating: Rating) => {
   const ratingsArray = Object.values(rating);

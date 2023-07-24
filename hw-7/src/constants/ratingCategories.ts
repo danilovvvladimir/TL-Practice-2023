@@ -1,4 +1,4 @@
-import { Category } from "../types/formTypes";
+import { Category } from "../types/form";
 
 export const ratingCategories: Category[] = [
   { key: "cleanliness", label: "Cleanliness" },
