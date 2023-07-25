@@ -1,6 +1,6 @@
-import { Rating } from "../types/form";
+import { RatingRecord } from "../types/form";
 
-export const calculateTotalRating = (rating: Rating) => {
+export const calculateTotalRating = (rating: RatingRecord) => {
   const ratingsArray = Object.values(rating);
 
   const totalRating = ratingsArray.reduce((acc, value) => acc + value, 0);

@@ -7,27 +7,21 @@ import Button from "../UI/Button/Button";
 
 // ==> Other imports <===
 import "./Form.css";
-import { Rating } from "../../types/form";
+import { RatingRecord } from "../../types/form";
 import { ratingCategories } from "../../constants/ratingCategories";
 import { ReviewsContext } from "../../context/context";
 import { calculateTotalRating } from "../../utils/calculateTotalRating";
-
-const initialRatingState: Rating = ratingCategories.reduce(
-  (acc, category) => ({ ...acc, [category.key]: 1 }),
-  {} as Rating,
-);
-
-const initialTextState = "";
+import { getInitialRatingState } from "../../utils/getInitialRatingState";
 
 const Form: FC = () => {
   const { addReview } = useContext(ReviewsContext);
 
-  const [rating, setRating] = useState<Rating>(initialRatingState);
-  const [text, setText] = useState(initialTextState);
+  const [rating, setRating] = useState<RatingRecord>(getInitialRatingState());
+  const [text, setText] = useState("");
 
   const totalRating = calculateTotalRating(rating);
 
-  const updateRating = (category: keyof Rating, value: number) => {
+  const updateRating = (category: keyof RatingRecord, value: number) => {
     setRating(prevRating => ({ ...prevRating, [category]: value }));
   };
 
@@ -36,18 +30,22 @@ const Form: FC = () => {
   };
 
   const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
-    const category = event.target.name as keyof Rating;
+    const category = event.target.name as keyof RatingRecord;
     const value = parseInt(event.target.value, 10);
 
     updateRating(category, value);
+  };
+
+  const resetForm = () => {
+    setRating(getInitialRatingState());
+    setText("");
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     addReview({ text, rating: totalRating });
 
-    setRating(initialRatingState);
-    setText(initialTextState);
+    resetForm();
   };
 
   return (
