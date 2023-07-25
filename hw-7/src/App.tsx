@@ -15,7 +15,7 @@ const App: FC = () => {
   const addReview = ({ text, rating }: NewReview) => {
     const newReview = { text, rating, id: uuidv4() };
 
-    setReviews([...reviews, newReview]);
+    setReviews([newReview, ...reviews]);
   };
 
   return (
