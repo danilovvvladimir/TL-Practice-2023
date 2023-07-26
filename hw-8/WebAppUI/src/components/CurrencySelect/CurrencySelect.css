@@ -1,8 +1,12 @@
 .currency-select {
-  border: 1px solid #202124;
+  border: 1px solid #dadce0;
   display: flex;
   padding: 1px;
   border-radius: 6px;
+}
+
+.currency-select:hover {
+  border-color: var(--title-color);
 }
 
 .currency-select__input {
@@ -20,14 +24,38 @@
   width: 100px;
   color: #4d5156;
 }
+.currency-select__divider {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1px;
+  height: 30px;
+  background-color: #dadce0;
+}
 
 .currency-select__area {
   background-color: #fff;
   overflow: hidden;
   position: relative;
   height: 40px;
-  display: inline-block;
+  display: flex;
+  align-items: center;
   width: 100%;
+}
+
+.currency-select__angle {
+  position: absolute;
+  right: 50px;
+  line-height: 0;
+}
+
+.currency-select__angle svg {
+  width: 16px;
+  height: 16px;
+}
+
+.currency-select__name {
+  padding: 0 20px;
 }
 
 .currency-select__area:focus-within {
@@ -38,9 +66,22 @@
   /* -webkit-appearance: none; */
   opacity: 0;
   z-index: 1;
-  line-height: 40px;
+  /* line-height: 40px; */
+  height: 40px;
   width: 100%;
   position: absolute;
   right: 0;
   font-size: 15px;
+}
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+}
+
+input[type="number"],
+input[type="number"]:hover,
+input[type="number"]:focus {
+  appearance: none;
+  -moz-appearance: textfield;
 }

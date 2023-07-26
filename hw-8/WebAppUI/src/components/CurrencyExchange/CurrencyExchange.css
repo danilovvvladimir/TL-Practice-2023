@@ -30,17 +30,26 @@
   color: var(--title-color);
 }
 
+.currency-exchange__content {
+  margin-bottom: 20px;
+}
+
 .currency-exchange__content-date {
   font-size: 12px;
   color: var(--description-color);
   margin-bottom: 12px;
 }
 
+.currency-exchange__content-selects {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
 .currency-exchange__description {
   margin: 0 auto;
   width: 100%;
   position: relative;
-  text-align: center;
 }
 
 .currency-exchange__description::before {
@@ -49,8 +58,7 @@
   width: 100%;
   height: 1px;
   left: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  top: 18px;
   background-color: #dadce0;
   z-index: 1;
 }
