@@ -1,12 +1,14 @@
 import { FC, useState } from "react";
 import Button from "../UI/Button/Button";
 import "./Description.css";
+import { Currency } from "../../types/currency";
 
 interface DescriptionProps {
-  buttonTitle: string;
+  paymentCurrency: Currency;
+  purchasedCurrency: Currency;
 }
 
-const Description: FC<DescriptionProps> = ({ buttonTitle }) => {
+const Description: FC<DescriptionProps> = ({ paymentCurrency, purchasedCurrency }) => {
   const [isDescriptionVisible, setIsDescriptionVisible] = useState<boolean>(false);
 
   const toggleDescriptionVisibility = () => {
@@ -16,7 +18,7 @@ const Description: FC<DescriptionProps> = ({ buttonTitle }) => {
   return (
     <div className="currency-exchange__description description">
       <Button className="description__button" onClick={toggleDescriptionVisibility}>
-        {buttonTitle}
+        {purchasedCurrency.code}/{paymentCurrency.code}: подробнее
         <span className="description__arrow">
           {isDescriptionVisible ? (
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -39,22 +41,16 @@ const Description: FC<DescriptionProps> = ({ buttonTitle }) => {
       {isDescriptionVisible && (
         <div className="description__content">
           <div className="description__content-block">
-            <h3 className="description__content-header">Japanese yen - YEN - ¥</h3>
-            <p className="description__content-text">
-              Accounting for approximately 2% of all global reserves, the Canadian dollar is the sixth-most held reserve
-              currency in the world, behind the U.S. dollar, euro, yen, sterling, and renminbi. The Canadian dollar is
-              popular with central banks because of Canada's relative economic soundness, the Canadian government's
-              strong sovereign position, and the stability of the country's legal and political systems.
-            </p>
+            <h3 className="description__content-header">
+              {purchasedCurrency.name} - {purchasedCurrency.code} - {purchasedCurrency.symbol}
+            </h3>
+            <p className="description__content-text">{purchasedCurrency.description}</p>
           </div>
           <div className="description__content-block">
-            <h3 className="description__content-header">Japanese yen - YEN - ¥</h3>
-            <p className="description__content-text">
-              Accounting for approximately 2% of all global reserves, the Canadian dollar is the sixth-most held reserve
-              currency in the world, behind the U.S. dollar, euro, yen, sterling, and renminbi. The Canadian dollar is
-              popular with central banks because of Canada's relative economic soundness, the Canadian government's
-              strong sovereign position, and the stability of the country's legal and political systems.
-            </p>
+            <h3 className="description__content-header">
+              {paymentCurrency.name} - {paymentCurrency.code} - {paymentCurrency.symbol}
+            </h3>
+            <p className="description__content-text">{paymentCurrency.description}</p>
           </div>
         </div>
       )}

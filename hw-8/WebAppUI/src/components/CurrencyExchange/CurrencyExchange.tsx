@@ -2,82 +2,117 @@ import { FC, ChangeEvent, useState, useEffect } from "react";
 import CurrencySelect from "../CurrencySelect/CurrencySelect";
 import Description from "../Description/Description";
 import "./CurrencyExchange.css";
-import { Currency, CurrencyAmount } from "../../types/currency";
-import { getAllCurrencies } from "../../utils/fetchData";
+import { Currency, CurrencyCoefficient, CurrencyWithAmount } from "../../types/currency";
+import { getCoefficientBetweenCurrencies, getCurrency } from "../../utils/fetchData";
 
-const CurrencyExchange: FC = () => {
-  const [currencies, setCurrencies] = useState<Currency[]>([]);
+interface CurrencyExchangeProps {
+  currencies: Currency[];
+}
 
-  const [purchasedCurrency, setPurchasedCurrency] = useState<CurrencyAmount>({ quantity: 1, code: "rub" });
-  const [paymentCurrency, setPaymentCurrency] = useState<CurrencyAmount>({ quantity: 1, code: "yen" });
+const CurrencyExchange: FC<CurrencyExchangeProps> = ({ currencies }) => {
+  const [purchasedCurrency, setPurchasedCurrency] = useState<CurrencyWithAmount>({
+    amount: 1,
+    ...currencies[0],
+  });
 
-  const [coefficient, setCoefficient] = useState<number>(1.2);
+  const [paymentCurrency, setPaymentCurrency] = useState<CurrencyWithAmount>({
+    amount: 1,
+    ...currencies[1],
+  });
+
+  const [coefficient, setCoefficient] = useState<number>(1);
 
   const handlePurchasedCurrencyChange = (event: ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
     if (event.target instanceof HTMLSelectElement) {
-      const purchasedCurrencyType = event.target.value;
+      const purchasedCurrencyCode = event.target.value;
 
-      setPurchasedCurrency({ ...purchasedCurrency, code: purchasedCurrencyType });
+      setPurchasedCurrency({ ...purchasedCurrency, code: purchasedCurrencyCode });
     } else {
       const purchasedCurrencyQuantity = parseFloat(event.target.value);
 
       setPurchasedCurrency({
         ...purchasedCurrency,
-        quantity: purchasedCurrencyQuantity > 0 ? purchasedCurrencyQuantity : 1,
+        amount: purchasedCurrencyQuantity > 0 ? purchasedCurrencyQuantity : 1,
       });
 
       setPaymentCurrency({
         ...paymentCurrency,
-        quantity: purchasedCurrencyQuantity * coefficient > 0 ? purchasedCurrencyQuantity * coefficient : coefficient,
+        amount: purchasedCurrencyQuantity * coefficient > 0 ? purchasedCurrencyQuantity * coefficient : coefficient,
       });
     }
   };
 
   const handlePaymentCurrencyChange = (event: ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
     if (event.target instanceof HTMLSelectElement) {
-      const paymentCurrencyType = event.target.value;
+      const paymentCurrencyCode = event.target.value;
 
-      setPaymentCurrency({ ...paymentCurrency, code: paymentCurrencyType });
+      setPaymentCurrency({ ...paymentCurrency, code: paymentCurrencyCode });
     } else {
       const paymentCurrencyQuantity = parseFloat(event.target.value);
       console.log("quanitty change", paymentCurrencyQuantity);
 
       setPaymentCurrency({
         ...paymentCurrency,
-        quantity: paymentCurrencyQuantity > 0 ? paymentCurrencyQuantity : 1,
+        amount: paymentCurrencyQuantity > 0 ? paymentCurrencyQuantity : 1,
       });
 
       setPurchasedCurrency({
         ...purchasedCurrency,
-        quantity: paymentCurrencyQuantity / coefficient > 0 ? paymentCurrencyQuantity / coefficient : 1 / coefficient,
+        amount: paymentCurrencyQuantity / coefficient > 0 ? paymentCurrencyQuantity / coefficient : 1 / coefficient,
       });
     }
   };
 
-  useEffect(() => {
-    const fetchAllCurrencies = async () => {
-      const data = await getAllCurrencies();
+  const fetchCurrencyByCode = async (code: string) => {
+    const data = await getCurrency(code);
+    return data;
+  };
 
-      setCurrencies(data);
+  const fetchCoefficient = async (
+    paymentCurrencyCode: string,
+    purchasedCurrencyCode: string,
+    fromDate: Date = new Date(),
+  ): Promise<CurrencyCoefficient[]> => {
+    const data = await getCoefficientBetweenCurrencies(paymentCurrencyCode, purchasedCurrencyCode, fromDate);
+    return data;
+  };
+
+  useEffect(() => {
+    const updatePurchasedCurrency = async () => {
+      const data = await fetchCurrencyByCode(purchasedCurrency.code);
+      setPurchasedCurrency(prevCurrency => ({ ...prevCurrency, ...data }));
     };
 
-    fetchAllCurrencies();
+    const updatePaymentCurrency = async () => {
+      const data = await fetchCurrencyByCode(paymentCurrency.code);
+      setPaymentCurrency(prevCurrency => ({
+        ...prevCurrency,
+        ...data,
+        amount: coefficient * purchasedCurrency.amount,
+      }));
+    };
 
-    setPurchasedCurrency({ ...purchasedCurrency, code: currencies.length > 0 ? currencies[0].code : "ERROR" });
-    setPaymentCurrency({ ...paymentCurrency, code: currencies.length > 1 ? currencies[1].code : "ERROR" });
+    const updateCoefficient = async () => {
+      const data = await fetchCoefficient(paymentCurrency.code, purchasedCurrency.code);
+      setCoefficient(data[data.length - 1].price);
+    };
 
-    // setPaymentCurrency({ ...paymentCurrency, quantity: purchasedCurrency.quantity * coefficient });
-  }, []);
-
-  console.log(currencies);
+    updatePurchasedCurrency();
+    updatePaymentCurrency();
+    updateCoefficient();
+  }, [purchasedCurrency.code, purchasedCurrency.amount, paymentCurrency.code, coefficient]);
 
   return (
     <section className="currency-exchange">
       <div className="container">
         <div className="currency-exchange__wrapper">
           <div className="currency-exchange__header">
-            <div className="currency-exchange__purchased">1 Российский рубль равно</div>
-            <div className="currency-exchange__payment">0,011 Доллар США</div>
+            <div className="currency-exchange__purchased">
+              {purchasedCurrency.amount} {purchasedCurrency.name} is
+            </div>
+            <div className="currency-exchange__payment">
+              {paymentCurrency.amount} {paymentCurrency.name}
+            </div>
           </div>
 
           <div className="currency-exchange__content">
@@ -100,7 +135,7 @@ const CurrencyExchange: FC = () => {
             <div className="currency-exchange__content-graphs"></div>
           </div>
 
-          <Description buttonTitle={`${purchasedCurrency.code}/${paymentCurrency.code}: подробнее`} />
+          <Description purchasedCurrency={purchasedCurrency} paymentCurrency={paymentCurrency} />
         </div>
       </div>
     </section>

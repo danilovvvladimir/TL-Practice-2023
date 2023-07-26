@@ -1,9 +1,9 @@
 import { FC, ChangeEvent } from "react";
 import "./CurrencySelect.css";
-import { CurrencyAmount } from "../../types/currency";
+import { CurrencyWithAmount } from "../../types/currency";
 
 interface CurrencySelectProps {
-  purchasedCurrencyValue: CurrencyAmount;
+  purchasedCurrencyValue: CurrencyWithAmount;
   options: string[];
   onPurchasedCurrencyChange: (event: ChangeEvent<HTMLSelectElement | HTMLInputElement>) => void;
 }
@@ -14,7 +14,7 @@ const CurrencySelect: FC<CurrencySelectProps> = ({ options, onPurchasedCurrencyC
       <input
         type="number"
         className="currency-select__input"
-        value={purchasedCurrencyValue.quantity}
+        value={purchasedCurrencyValue.amount}
         onChange={e => onPurchasedCurrencyChange(e)}
       />
       <div className="currency-select__area">

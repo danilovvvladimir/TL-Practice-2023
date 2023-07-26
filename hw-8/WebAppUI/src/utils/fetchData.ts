@@ -20,12 +20,13 @@ export const getCoefficientBetweenCurrencies = async (
 ) => {
   const queryPaymentCode = `PaymentCurrency=${paymentCurrencyCode}`;
   const queryPurchasedCode = `PurchasedCurrency=${purchasedCurrencyCode}`;
-  const queryFromDate = `FromDateTime=${fromDate.toDateString()}`;
-  const queryToDate = toDate ? `&ToDateTime=${toDate.toDateString()}` : "";
+  const queryFromDate = fromDate.toISOString().slice(0, 19) + "Z";
+  const queryToDate = toDate ? `&ToDateTime=${toDate.toISOString().slice(0, 19) + "Z"}` : "";
+  console.log(queryFromDate);
 
   const queryString = `?${queryPaymentCode}&${queryPurchasedCode}&${queryFromDate}${queryToDate}'`;
 
-  const response = await fetch(`${API_URL}/price/${queryString}}`);
+  const response = await fetch(`${API_URL}/prices${queryString}}`);
 
   return await response.json();
 };
