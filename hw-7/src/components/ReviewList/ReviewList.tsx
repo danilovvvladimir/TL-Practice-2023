@@ -1,12 +1,7 @@
-// ==> Libs imports <===
 import { FC, useContext } from "react";
-
-// ==> Components imports <===
 import SingleReview from "../SingleReview/SingleReview";
-
-// ==> Other imports <===
-import "./ReviewList.css";
 import { ReviewsContext } from "../../context/context";
+import "./ReviewList.css";
 
 const ReviewList: FC = () => {
   const { reviews } = useContext(ReviewsContext);

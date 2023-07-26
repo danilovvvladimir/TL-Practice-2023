@@ -1,9 +1,4 @@
-// ==> Libs imports <===
 import { FC, ButtonHTMLAttributes } from "react";
-
-// ==> Components imports <===
-
-// ==> Other imports <===
 import "./Button.css";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {}

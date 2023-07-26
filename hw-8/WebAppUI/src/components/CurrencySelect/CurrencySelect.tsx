@@ -1,13 +1,9 @@
-// ==> Libs imports <===
 import { FC, ChangeEvent } from "react";
-// ==> Components imports <===
-
-// ==> Other imports <===
 import "./CurrencySelect.css";
-import { Currency } from "../../types/currency";
+import { CurrencyAmount } from "../../types/currency";
 
 interface CurrencySelectProps {
-  purchasedCurrencyValue: Currency;
+  purchasedCurrencyValue: CurrencyAmount;
   options: string[];
   onPurchasedCurrencyChange: (event: ChangeEvent<HTMLSelectElement | HTMLInputElement>) => void;
 }
@@ -25,7 +21,7 @@ const CurrencySelect: FC<CurrencySelectProps> = ({ options, onPurchasedCurrencyC
         <div className="currency-select__divider"></div>
         <select
           className="currency-select__select"
-          value={purchasedCurrencyValue.type}
+          value={purchasedCurrencyValue.code}
           onChange={e => onPurchasedCurrencyChange(e)}
         >
           {options.map(option => (
@@ -35,7 +31,7 @@ const CurrencySelect: FC<CurrencySelectProps> = ({ options, onPurchasedCurrencyC
           ))}
         </select>
         <span className="currency-select__name" aria-hidden="true">
-          {purchasedCurrencyValue.type}
+          {purchasedCurrencyValue.code}
         </span>
         <div className="currency-select__angle">
           <svg width="12" height="6" viewBox="0 0 12 6" fill="none" xmlns="http://www.w3.org/2000/svg">

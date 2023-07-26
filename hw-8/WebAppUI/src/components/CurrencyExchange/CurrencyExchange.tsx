@@ -1,26 +1,23 @@
-// ==> Libs imports <===
 import { FC, ChangeEvent, useState, useEffect } from "react";
-// ==> Components imports <===
-
-// ==> Other imports <===
-import "./CurrencyExchange.css";
-import Button from "../UI/Button/Button";
 import CurrencySelect from "../CurrencySelect/CurrencySelect";
-import { Currency } from "../../types/currency";
+import Description from "../Description/Description";
+import "./CurrencyExchange.css";
+import { Currency, CurrencyAmount } from "../../types/currency";
+import { getAllCurrencies } from "../../utils/fetchData";
 
 const CurrencyExchange: FC = () => {
-  const [purchasedCurrency, setPurchasedCurrency] = useState<Currency>({ quantity: 1, type: "rub" });
-  const [paymentCurrency, setPaymentCurrency] = useState<Currency>({ quantity: 1, type: "yen" });
+  const [currencies, setCurrencies] = useState<Currency[]>([]);
+
+  const [purchasedCurrency, setPurchasedCurrency] = useState<CurrencyAmount>({ quantity: 1, code: "rub" });
+  const [paymentCurrency, setPaymentCurrency] = useState<CurrencyAmount>({ quantity: 1, code: "yen" });
 
   const [coefficient, setCoefficient] = useState<number>(1.2);
-
-  const [isDescriptionVisible, setIsDescriptionVisible] = useState<boolean>(false);
 
   const handlePurchasedCurrencyChange = (event: ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
     if (event.target instanceof HTMLSelectElement) {
       const purchasedCurrencyType = event.target.value;
 
-      setPurchasedCurrency({ ...purchasedCurrency, type: purchasedCurrencyType });
+      setPurchasedCurrency({ ...purchasedCurrency, code: purchasedCurrencyType });
     } else {
       const purchasedCurrencyQuantity = parseFloat(event.target.value);
 
@@ -40,7 +37,7 @@ const CurrencyExchange: FC = () => {
     if (event.target instanceof HTMLSelectElement) {
       const paymentCurrencyType = event.target.value;
 
-      setPaymentCurrency({ ...paymentCurrency, type: paymentCurrencyType });
+      setPaymentCurrency({ ...paymentCurrency, code: paymentCurrencyType });
     } else {
       const paymentCurrencyQuantity = parseFloat(event.target.value);
       console.log("quanitty change", paymentCurrencyQuantity);
@@ -58,8 +55,21 @@ const CurrencyExchange: FC = () => {
   };
 
   useEffect(() => {
-    setPaymentCurrency({ ...paymentCurrency, quantity: purchasedCurrency.quantity * coefficient });
+    const fetchAllCurrencies = async () => {
+      const data = await getAllCurrencies();
+
+      setCurrencies(data);
+    };
+
+    fetchAllCurrencies();
+
+    setPurchasedCurrency({ ...purchasedCurrency, code: currencies.length > 0 ? currencies[0].code : "ERROR" });
+    setPaymentCurrency({ ...paymentCurrency, code: currencies.length > 1 ? currencies[1].code : "ERROR" });
+
+    // setPaymentCurrency({ ...paymentCurrency, quantity: purchasedCurrency.quantity * coefficient });
   }, []);
+
+  console.log(currencies);
 
   return (
     <section className="currency-exchange">
@@ -77,48 +87,20 @@ const CurrencyExchange: FC = () => {
                 <CurrencySelect
                   purchasedCurrencyValue={purchasedCurrency}
                   onPurchasedCurrencyChange={handlePurchasedCurrencyChange}
-                  options={["rub", "yen"]}
+                  options={currencies.map(c => c.code)}
                 />
 
                 <CurrencySelect
                   purchasedCurrencyValue={paymentCurrency}
                   onPurchasedCurrencyChange={handlePaymentCurrencyChange}
-                  options={["rub", "yen"]}
+                  options={currencies.map(c => c.code)}
                 />
               </div>
             </div>
             <div className="currency-exchange__content-graphs"></div>
           </div>
 
-          <div className="currency-exchange__description description">
-            <Button
-              className="currency-exchange__description-btn"
-              onClick={() => setIsDescriptionVisible(isDescriptionVisible => !isDescriptionVisible)}
-            >
-              {purchasedCurrency.type}/{paymentCurrency.type}: подробнее
-              <span className="currency-exchange__arrow">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M16 8L14.59 6.59L9 12.17L9 -3.0598e-07L7 -3.93402e-07L7 12.17L1.41 6.59L-3.49691e-07 8L8 16L16 8Z"
-                    fill="black"
-                  />
-                </svg>
-              </span>
-            </Button>
-
-            {isDescriptionVisible && (
-              <div className="currency-exchange__description-content description__content">
-                <div className="currency-exchange__description-content-header">Japanese yen - YEN - ¥</div>
-                <p className="currency-exchange__description-text">
-                  Accounting for approximately 2% of all global reserves, the Canadian dollar is the sixth-most held
-                  reserve currency in the world, behind the U.S. dollar, euro, yen, sterling, and renminbi. The Canadian
-                  dollar is popular with central banks because of Canada's relative economic soundness, the Canadian
-                  government's strong sovereign position, and the stability of the country's legal and political
-                  systems.
-                </p>
-              </div>
-            )}
-          </div>
+          <Description buttonTitle={`${purchasedCurrency.code}/${paymentCurrency.code}: подробнее`} />
         </div>
       </div>
     </section>

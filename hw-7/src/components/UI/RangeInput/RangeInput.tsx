@@ -1,9 +1,4 @@
-// ==> Libs imports <===
 import { ChangeEvent, FC } from "react";
-
-// ==> Components imports <===
-
-// ==> Other imports <===
 import "./RangeInput.css";
 
 interface CustomRangeInputProps {

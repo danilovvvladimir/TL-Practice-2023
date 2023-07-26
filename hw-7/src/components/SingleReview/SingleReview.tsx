@@ -1,9 +1,4 @@
-// ==> Libs imports <===
 import { FC } from "react";
-
-// ==> Components imports <===
-
-// ==> Other imports <===
 import "./SingleReview.css";
 import userIMG from "../../assets/images/user-photo.jpg";
 import { NewReview } from "../../types/review";

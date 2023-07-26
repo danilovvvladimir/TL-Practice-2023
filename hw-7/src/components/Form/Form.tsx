@@ -1,17 +1,12 @@
-// ==> Libs imports <===
 import { FC, FormEvent, ChangeEvent, useState, useContext } from "react";
-
-// ==> Components imports <===
 import RangeInput from "../UI/RangeInput/RangeInput";
 import Button from "../UI/Button/Button";
-
-// ==> Other imports <===
-import "./Form.css";
 import { RatingRecord } from "../../types/form";
 import { ratingCategories } from "../../constants/ratingCategories";
 import { ReviewsContext } from "../../context/context";
 import { calculateTotalRating } from "../../utils/calculateTotalRating";
 import { getInitialRatingState } from "../../utils/getInitialRatingState";
+import "./Form.css";
 
 const Form: FC = () => {
   const { addReview } = useContext(ReviewsContext);
