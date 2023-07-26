@@ -3,5 +3,5 @@
   "language": "en_US",
   "dictionaryDefinitions": [{ "name": "customWords", "path": "./.words.txt" }],
   "dictionaries": ["companies", "misc", "softwareTerms", "npm", "node", "typescript", "html", "css", "customWords"],
-  "ignorePaths": [".yarn", "**/*/assets", "**/*/dist", "package.json", "node_modules"]
+  "ignorePaths": [".yarn", "package.json", "node_modules", "public", "src/assets"]
 }

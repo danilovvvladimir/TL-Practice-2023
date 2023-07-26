@@ -1,30 +1,41 @@
 {
-  "name": "web-app-ui",
+  "name": "lab3-boilerplate",
   "private": true,
   "version": "0.0.0",
-  "main": "src/main.js",
-  "license": "MIT",
+  "type": "module",
   "scripts": {
-    "app-build": "vite build",
-    "app-dev": "vite --open",
-    "app-preview": "vite preview",
+    "dev": "vite",
+    "build": "tsc && vite build",
     "lint": "run-s lint:*",
-    "lint:prettier": "prettier --check --log-level warn .",
     "lint:cspell": "cspell --no-progress --no-summary .",
-    "lint:eslint": "eslint .",
-    "lint:stylelint": "stylelint --max-warnings=0 **/*.css"
+    "lint:eslint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
+    "lint:prettier": "prettier --check --log-level warn .",
+    "lint:stylelint": "stylelint --max-warnings=0 src/**/*.css",
+    "prettier:fix": "prettier --write .",
+    "preview": "vite preview",
+    "stylelint:fix": "stylelint --fix src/**/*.css"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@types/react": "^18.2.15",
+    "@types/react-dom": "^18.2.7",
+    "@typescript-eslint/eslint-plugin": "^6.0.0",
+    "@typescript-eslint/parser": "^6.0.0",
+    "@vitejs/plugin-react": "^4.0.3",
     "cspell": "^6.31.1",
-    "eslint": "^8.44.0",
+    "eslint": "^8.45.0",
     "eslint-config-prettier": "^8.8.0",
-    "eslint-define-config": "^1.21.0",
-    "eslint-plugin-perfectionist": "^1.4.0",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-refresh": "^0.4.3",
+    "npm-run-all": "^4.1.5",
     "prettier": "^3.0.0",
     "stylelint": "^15.10.1",
     "stylelint-config-recess-order": "^4.3.0",
-    "npm-run-all": "^4.1.5",
-    "vite": "^4.4.4"
-  },
-  "packageManager": "yarn@3.4.1"
+    "stylelint-config-standard": "^34.0.0",
+    "typescript": "^5.0.2",
+    "vite": "^4.4.5"
+  }
 }
