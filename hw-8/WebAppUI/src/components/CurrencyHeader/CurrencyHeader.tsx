@@ -3,6 +3,7 @@ import "./CurrencyHeader.css";
 import Button from "../UI/Button/Button";
 import { CurrencyWithAmount } from "../../types/currency";
 import { FilterContext } from "../../context/context";
+import { roundNumber } from "../../utils/roundNumber";
 
 interface CurrencyHeaderProps {
   purchasedCurrency: CurrencyWithAmount;
@@ -16,10 +17,10 @@ const CurrencyHeader: FC<CurrencyHeaderProps> = ({ paymentCurrency, purchasedCur
     <div className="currency-exchange__header">
       <div className="currency-exchange__info">
         <div className="currency-exchange__purchased">
-          {paymentCurrency.amount} {paymentCurrency.name} is
+          {roundNumber(paymentCurrency.amount, 4)} {paymentCurrency.name} is
         </div>
         <div className="currency-exchange__payment">
-          {purchasedCurrency.amount} {purchasedCurrency.name}
+          {roundNumber(purchasedCurrency.amount, 4)} {purchasedCurrency.name}
         </div>
       </div>
       <Button
