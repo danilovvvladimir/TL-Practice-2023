@@ -65,7 +65,7 @@ const CurrencyExchange: FC = () => {
     updatePaymentCurrency();
     updatePurchasedCurrency();
     updateCoefficientsHistory();
-  }, [paymentCurrency.code, purchasedCurrency, latestCoefficient?.price]);
+  }, [paymentCurrency.code, purchasedCurrency.code, latestCoefficient?.price]);
 
   useEffect(() => {
     const intervalId = setInterval(async () => {
