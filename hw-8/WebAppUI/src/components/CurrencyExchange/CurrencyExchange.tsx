@@ -5,6 +5,7 @@ import { Currency, CurrencyCoefficient, CurrencyWithAmount } from "../../types/c
 import { getCoefficientBetweenCurrencies, getCurrency } from "../../utils/fetchData";
 import { FETCH_API_OFFSET } from "../../constants/api";
 import CurrencyContent from "../CurrencyContent/CurrencyContent";
+import Loader from "../Loader/Loader";
 
 interface CurrencyExchangeProps {
   currencies: Currency[];
@@ -119,7 +120,7 @@ const CurrencyExchange: FC<CurrencyExchangeProps> = ({ currencies }) => {
           </div>
 
           {latestCoefficient === undefined ? (
-            <h2>Происходит загрузка данных по валютам...</h2>
+            <Loader>Loading data about current Currency...</Loader>
           ) : (
             <CurrencyContent
               handleCurrencyChange={handleCurrencyChange}
