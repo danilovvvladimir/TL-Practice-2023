@@ -26,8 +26,8 @@ const CurrencyHeader: FC<CurrencyHeaderProps> = ({ paymentCurrency, purchasedCur
         className="currency-exchange__filter-button"
         onClick={() =>
           addFilter({
-            paymentCurrencyCode: paymentCurrency.code,
-            purchasedCurrencyCode: purchasedCurrency.code,
+            paymentCurrency: paymentCurrency,
+            purchasedCurrency: purchasedCurrency,
           })
         }
       >

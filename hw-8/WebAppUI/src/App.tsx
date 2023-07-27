@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import CurrencyExchange from "./components/CurrencyExchange/CurrencyExchange";
-import { getAllCurrencies } from "./utils/fetchData";
+import { fetchAllCurrencies } from "./utils/fetchData";
 import { Currency } from "./types/currency";
 import Error from "./components/Error/Error";
 import Loader from "./components/Loader/Loader";
@@ -15,14 +15,14 @@ const App = () => {
 
   const [filters, setFilters] = useState<Filter[]>([]);
 
-  const addFilter = ({ paymentCurrencyCode, purchasedCurrencyCode }: NewFilter) => {
-    const newFilter = { paymentCurrencyCode, purchasedCurrencyCode, id: uuidv4() };
+  const addFilter = ({ paymentCurrency, purchasedCurrency }: NewFilter) => {
+    const newFilter = { paymentCurrency, purchasedCurrency, id: uuidv4() };
 
     setFilters([newFilter, ...filters]);
   };
 
-  const fetchAllCurrencies = async () => {
-    const data: Currency[] = await getAllCurrencies();
+  const getAllCurrencies = async () => {
+    const data: Currency[] = await fetchAllCurrencies();
     setCurrencies(data);
   };
 
@@ -30,7 +30,7 @@ const App = () => {
     const fetchData = async () => {
       try {
         setError("");
-        await fetchAllCurrencies();
+        await getAllCurrencies();
       } catch (error) {
         setError("Could not get data from the server.");
       }

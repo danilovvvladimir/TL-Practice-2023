@@ -4,7 +4,11 @@ import "./FilterTabs.css";
 import { FilterContext } from "../../context/context";
 import Button from "../UI/Button/Button";
 
-const FilterTabs: FC = () => {
+interface FilterTabsProps {
+  getCurrenciesFromTabs: (id: string) => void;
+}
+
+const FilterTabs: FC<FilterTabsProps> = ({ getCurrenciesFromTabs }) => {
   const { filters } = useContext(FilterContext);
 
   return (
@@ -13,8 +17,8 @@ const FilterTabs: FC = () => {
         <div className="filter-tabs__wrapper">
           {filters.length > 0 ? (
             filters.map(filter => (
-              <Button className="filter-tabs__tab" key={filter.id}>
-                {filter.paymentCurrencyCode} / {filter.purchasedCurrencyCode}
+              <Button className="filter-tabs__tab" key={filter.id} onClick={() => getCurrenciesFromTabs(filter.id)}>
+                {filter.paymentCurrency.code} / {filter.purchasedCurrency.code}
               </Button>
             ))
           ) : (

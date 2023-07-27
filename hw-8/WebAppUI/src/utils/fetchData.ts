@@ -1,18 +1,18 @@
 import { API_URL } from "../constants/constants";
 
-export const getAllCurrencies = async () => {
+export const fetchAllCurrencies = async () => {
   const response = await fetch(`${API_URL}/Currencies`);
 
   return await response.json();
 };
 
-export const getCurrency = async (code: string) => {
+export const fetchCurrency = async (code: string) => {
   const response = await fetch(`${API_URL}/Currencies/${code.toUpperCase()}`);
 
   return await response.json();
 };
 
-export const getCoefficientBetweenCurrencies = async (
+export const fetchCoefficientBetweenCurrencies = async (
   paymentCurrencyCode: string,
   purchasedCurrencyCode: string,
   fromDate: Date,
