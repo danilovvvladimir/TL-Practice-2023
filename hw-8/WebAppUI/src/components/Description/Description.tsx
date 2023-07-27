@@ -18,7 +18,7 @@ const Description: FC<DescriptionProps> = ({ paymentCurrency, purchasedCurrency 
   return (
     <div className="currency-exchange__description description">
       <Button className="description__button" onClick={toggleDescriptionVisibility}>
-        {purchasedCurrency.code}/{paymentCurrency.code}: подробнее
+        {paymentCurrency.code}/{purchasedCurrency.code}: подробнее
         <span className="description__arrow">
           {isDescriptionVisible ? (
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -42,15 +42,15 @@ const Description: FC<DescriptionProps> = ({ paymentCurrency, purchasedCurrency 
         <div className="description__content">
           <div className="description__content-block">
             <h3 className="description__content-header">
-              {purchasedCurrency.name} - {purchasedCurrency.code} - {purchasedCurrency.symbol}
-            </h3>
-            <p className="description__content-text">{purchasedCurrency.description}</p>
-          </div>
-          <div className="description__content-block">
-            <h3 className="description__content-header">
               {paymentCurrency.name} - {paymentCurrency.code} - {paymentCurrency.symbol}
             </h3>
             <p className="description__content-text">{paymentCurrency.description}</p>
+          </div>
+          <div className="description__content-block">
+            <h3 className="description__content-header">
+              {purchasedCurrency.name} - {purchasedCurrency.code} - {purchasedCurrency.symbol}
+            </h3>
+            <p className="description__content-text">{purchasedCurrency.description}</p>
           </div>
         </div>
       )}

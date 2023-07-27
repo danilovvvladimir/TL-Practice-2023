@@ -1,4 +1,4 @@
-import { FC, ChangeEvent, useState, useEffect } from "react";
+import { FC, useState, useEffect } from "react";
 import Description from "../Description/Description";
 import "./CurrencyExchange.css";
 import { Currency, CurrencyCoefficient, CurrencyWithAmount } from "../../types/currency";
@@ -6,56 +6,21 @@ import { getCoefficientBetweenCurrencies, getCurrency } from "../../utils/fetchD
 import { FETCH_API_OFFSET } from "../../constants/constants";
 import CurrencyContent from "../CurrencyContent/CurrencyContent";
 import Loader from "../Loader/Loader";
+import CurrencyHeader from "../CurrencyHeader/CurrencyHeader";
+import { handleCurrencyChange } from "../../utils/handleCurrencyChange";
 
 interface CurrencyExchangeProps {
-  currencies: Currency[];
+  defaultPurchasedCurrency: CurrencyWithAmount;
+  defaultPaymentCurrency: CurrencyWithAmount;
 }
 
-const CurrencyExchange: FC<CurrencyExchangeProps> = ({ currencies }) => {
-  const [purchasedCurrency, setPurchasedCurrency] = useState<CurrencyWithAmount>({
-    amount: 1,
-    ...currencies[0],
-  });
-
-  const [paymentCurrency, setPaymentCurrency] = useState<CurrencyWithAmount>({
-    amount: 1,
-    ...currencies[1],
-  });
+const CurrencyExchange: FC<CurrencyExchangeProps> = ({ defaultPaymentCurrency, defaultPurchasedCurrency }) => {
+  const [paymentCurrency, setPaymentCurrency] = useState<CurrencyWithAmount>(defaultPaymentCurrency);
+  const [purchasedCurrency, setPurchasedCurrency] = useState<CurrencyWithAmount>(defaultPurchasedCurrency);
 
   const [coefficientsHistory, setCoefficientsHistory] = useState<CurrencyCoefficient[]>([]);
 
-  const latestCoefficient =
-    coefficientsHistory.length > 0 ? coefficientsHistory[coefficientsHistory.length - 1] : undefined;
-
-  const handleCurrencyChange = (
-    event: ChangeEvent<HTMLSelectElement | HTMLInputElement>,
-    activeCurrency: CurrencyWithAmount,
-    passiveCurrency: CurrencyWithAmount,
-    setActiveCurrency: (state: CurrencyWithAmount) => void,
-    setPassiveCurrency: (state: CurrencyWithAmount) => void,
-    currentCoefficient: number,
-  ) => {
-    if (event.target instanceof HTMLSelectElement) {
-      const activeCurrencyCode = event.target.value;
-
-      setActiveCurrency({ ...activeCurrency, code: activeCurrencyCode });
-    } else {
-      const activeCurrencyQuantity = parseFloat(event.target.value);
-
-      setActiveCurrency({
-        ...activeCurrency,
-        amount: activeCurrencyQuantity > 0 ? activeCurrencyQuantity : 1,
-      });
-
-      setPassiveCurrency({
-        ...passiveCurrency,
-        amount:
-          activeCurrencyQuantity * currentCoefficient > 0
-            ? activeCurrencyQuantity * currentCoefficient
-            : currentCoefficient,
-      });
-    }
-  };
+  const [latestCoefficient, setLatestCoefficient] = useState<CurrencyCoefficient | undefined>(undefined);
 
   const fetchCurrencyByCode = async (code: string) => {
     const data = await getCurrency(code);
@@ -71,30 +36,35 @@ const CurrencyExchange: FC<CurrencyExchangeProps> = ({ currencies }) => {
     return data;
   };
 
-  const updatePurchasedCurrency = async () => {
-    const data = await fetchCurrencyByCode(purchasedCurrency.code);
-    setPurchasedCurrency(prevCurrency => ({ ...prevCurrency, ...data }));
+  const updatePaymentCurrency = async () => {
+    const newPaymentCurrency: Currency = await fetchCurrencyByCode(paymentCurrency.code);
+
+    setPaymentCurrency({
+      amount: paymentCurrency.amount,
+      ...newPaymentCurrency,
+    });
   };
 
-  const updatePaymentCurrency = async () => {
-    const data = await fetchCurrencyByCode(paymentCurrency.code);
-    setPaymentCurrency(prevCurrency => ({
-      ...prevCurrency,
-      ...data,
-      amount: latestCoefficient ? latestCoefficient.price * purchasedCurrency.amount : 1,
-    }));
+  const updatePurchasedCurrency = async () => {
+    const newPurchasedCurrency: Currency = await fetchCurrencyByCode(purchasedCurrency.code);
+    setPurchasedCurrency({
+      ...newPurchasedCurrency,
+      amount: latestCoefficient ? latestCoefficient.price * paymentCurrency.amount : 1,
+    });
   };
 
   const updateCoefficientsHistory = async () => {
-    const data = await fetchCoefficient(paymentCurrency.code, purchasedCurrency.code);
+    const data: CurrencyCoefficient[] = await fetchCoefficient(purchasedCurrency.code, paymentCurrency.code);
     setCoefficientsHistory(data);
+
+    setLatestCoefficient(data[data.length - 1]);
   };
 
   useEffect(() => {
-    updatePurchasedCurrency();
     updatePaymentCurrency();
+    updatePurchasedCurrency();
     updateCoefficientsHistory();
-  }, [purchasedCurrency.code, purchasedCurrency.amount, paymentCurrency.code, latestCoefficient?.price]);
+  }, [paymentCurrency.code, purchasedCurrency.code, latestCoefficient?.price]);
 
   useEffect(() => {
     const intervalId = setInterval(async () => {
@@ -110,31 +80,23 @@ const CurrencyExchange: FC<CurrencyExchangeProps> = ({ currencies }) => {
     <section className="currency-exchange">
       <div className="container">
         <div className="currency-exchange__wrapper">
-          <div className="currency-exchange__header">
-            <div className="currency-exchange__purchased">
-              {purchasedCurrency.amount} {purchasedCurrency.name} is
-            </div>
-            <div className="currency-exchange__payment">
-              {paymentCurrency.amount} {paymentCurrency.name}
-            </div>
-          </div>
+          <CurrencyHeader paymentCurrency={paymentCurrency} purchasedCurrency={purchasedCurrency} />
 
           {latestCoefficient === undefined ? (
             <Loader>Loading data about current Currency...</Loader>
           ) : (
             <CurrencyContent
-              handleCurrencyChange={handleCurrencyChange}
-              latestCoefficient={latestCoefficient}
-              paymentCurrency={paymentCurrency}
               purchasedCurrency={purchasedCurrency}
-              currencies={currencies}
+              paymentCurrency={paymentCurrency}
+              coefficientsHistory={coefficientsHistory}
+              handleCurrencyChange={handleCurrencyChange}
               setPaymentCurrency={setPaymentCurrency}
               setPurchasedCurrency={setPurchasedCurrency}
-              coefficientsHistory={coefficientsHistory}
+              latestCoefficient={latestCoefficient}
             />
           )}
 
-          <Description purchasedCurrency={purchasedCurrency} paymentCurrency={paymentCurrency} />
+          <Description paymentCurrency={paymentCurrency} purchasedCurrency={purchasedCurrency} />
         </div>
       </div>
     </section>

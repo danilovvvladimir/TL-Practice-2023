@@ -63,15 +63,14 @@
 }
 
 .currency-select__select {
-  /* -webkit-appearance: none; */
   opacity: 0;
-  z-index: 1;
-  /* line-height: 40px; */
   height: 40px;
   width: 100%;
   position: absolute;
+  z-index: 1;
   right: 0;
   font-size: 15px;
+  cursor: pointer;
 }
 
 input[type="number"]::-webkit-outer-spin-button,

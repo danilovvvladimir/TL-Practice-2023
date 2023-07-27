@@ -35,7 +35,7 @@ export const options = {
   },
 };
 
-export const CurrencyChart: FC<ChartProps> = ({ dataSet, labels }) => {
+export const AreaChart: FC<ChartProps> = ({ dataSet, labels }) => {
   const data = {
     labels,
     datasets: [
@@ -50,4 +50,4 @@ export const CurrencyChart: FC<ChartProps> = ({ dataSet, labels }) => {
   return <Line options={options} data={data} width="400px" height="200px" />;
 };
 
-export default CurrencyChart;
+export default AreaChart;

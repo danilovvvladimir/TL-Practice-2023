@@ -14,7 +14,7 @@
 .currency-exchange__content-date {
   font-size: 12px;
   color: var(--description-color);
-  margin-bottom: 12px;
+  margin-bottom: 20px;
 }
 
 .currency-exchange__content-selects {
@@ -27,10 +27,13 @@
   display: flex;
   padding: 0 20px;
   justify-content: space-between;
+  margin-bottom: 2px;
 }
 
 .currency-exchange__chart-button {
   padding: 4px 8px;
+  font-size: 14px;
+  border-radius: 5px;
 }
 
 .currency-exchange__chart-button.active {
