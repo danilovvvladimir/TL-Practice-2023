@@ -1,0 +1,45 @@
+.currency-exchange__content {
+  margin-bottom: 20px;
+  display: flex;
+  gap: 16px;
+}
+
+.currency-exchange__content-info {
+  width: 50%;
+}
+
+.currency-exchange__content-chart {
+  width: 50%;
+}
+.currency-exchange__content-date {
+  font-size: 12px;
+  color: var(--description-color);
+  margin-bottom: 12px;
+}
+
+.currency-exchange__content-selects {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.currency-exchange__chart-tabs {
+  display: flex;
+  padding: 0 20px;
+  justify-content: space-between;
+}
+
+.currency-exchange__chart-button {
+  padding: 4px 8px;
+}
+
+.currency-exchange__chart-button.active {
+  color: var(--accent-color);
+  background-color: #f6f7f8;
+  font-weight: 600;
+}
+
+.currency-exchange__chart-button:hover {
+  color: var(--accent-color);
+  background-color: #f6f7f8;
+}

@@ -1,12 +1,18 @@
-import { FC, ChangeEvent } from "react";
+import { FC, ChangeEvent, useState, useEffect } from "react";
 import "./CurrencyContent.css";
 import { Currency, CurrencyCoefficient, CurrencyWithAmount } from "../../types/currency";
 import CurrencySelect from "../CurrencySelect/CurrencySelect";
+import { CurrencyChart } from "../UI/CurrencyChart/CurrencyChart";
+import Button from "../UI/Button/Button";
+import { CHART_BUTTON_LABELS } from "../../constants/constants";
 
 interface CurrencyContentProps {
   latestCoefficient: CurrencyCoefficient;
   purchasedCurrency: CurrencyWithAmount;
   paymentCurrency: CurrencyWithAmount;
+  setPurchasedCurrency: (state: CurrencyWithAmount) => void;
+  setPaymentCurrency: (state: CurrencyWithAmount) => void;
+  currencies: Currency[];
   handleCurrencyChange: (
     event: ChangeEvent<HTMLSelectElement | HTMLInputElement>,
     activeCurrency: CurrencyWithAmount,
@@ -15,9 +21,7 @@ interface CurrencyContentProps {
     setPassiveCurrency: (state: CurrencyWithAmount) => void,
     currentCoefficient: number,
   ) => void;
-  setPurchasedCurrency: (state: CurrencyWithAmount) => void;
-  setPaymentCurrency: (state: CurrencyWithAmount) => void;
-  currencies: Currency[];
+  coefficientsHistory: CurrencyCoefficient[];
 }
 
 const CurrencyContent: FC<CurrencyContentProps> = ({
@@ -28,7 +32,20 @@ const CurrencyContent: FC<CurrencyContentProps> = ({
   setPurchasedCurrency,
   setPaymentCurrency,
   currencies,
+  coefficientsHistory,
 }) => {
+  const [currentCoefficients, setCurrentCoefficients] = useState<CurrencyCoefficient[]>(coefficientsHistory.slice(-6));
+
+  const [currentTabIndex, setCurrentTabIndex] = useState(CHART_BUTTON_LABELS.length - 1);
+
+  const handleChangeChartsCoefficients = (value: number) => {
+    setCurrentTabIndex(6 - value - 1);
+  };
+
+  useEffect(() => {
+    setCurrentCoefficients(coefficientsHistory.slice(6 * -(6 - currentTabIndex - 1)));
+  }, [coefficientsHistory, currentTabIndex]);
+
   return (
     <div className="currency-exchange__content">
       <div className="currency-exchange__content-info">
@@ -67,7 +84,28 @@ const CurrencyContent: FC<CurrencyContentProps> = ({
           />
         </div>
       </div>
-      <div className="currency-exchange__content-graphs"></div>
+      <div className="currency-exchange__content-chart">
+        <div className="currency-exchange__chart-tabs">
+          {CHART_BUTTON_LABELS.map((value, index) => {
+            const finalClassName =
+              index === currentTabIndex ? "currency-exchange__chart-button active" : "currency-exchange__chart-button";
+            return (
+              <Button
+                key={value}
+                onClick={() => handleChangeChartsCoefficients(value)}
+                data-chart-value={value}
+                className={finalClassName}
+              >
+                {value} MIN
+              </Button>
+            );
+          })}
+        </div>
+        <CurrencyChart
+          dataSet={currentCoefficients.map(coef => coef.price)}
+          labels={currentCoefficients.map(coef => coef.dateTime)}
+        />
+      </div>
     </div>
   );
 };

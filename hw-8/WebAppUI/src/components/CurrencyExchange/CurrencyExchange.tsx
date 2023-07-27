@@ -3,7 +3,7 @@ import Description from "../Description/Description";
 import "./CurrencyExchange.css";
 import { Currency, CurrencyCoefficient, CurrencyWithAmount } from "../../types/currency";
 import { getCoefficientBetweenCurrencies, getCurrency } from "../../utils/fetchData";
-import { FETCH_API_OFFSET } from "../../constants/api";
+import { FETCH_API_OFFSET } from "../../constants/constants";
 import CurrencyContent from "../CurrencyContent/CurrencyContent";
 import Loader from "../Loader/Loader";
 
@@ -130,6 +130,7 @@ const CurrencyExchange: FC<CurrencyExchangeProps> = ({ currencies }) => {
               currencies={currencies}
               setPaymentCurrency={setPaymentCurrency}
               setPurchasedCurrency={setPurchasedCurrency}
+              coefficientsHistory={coefficientsHistory}
             />
           )}
 

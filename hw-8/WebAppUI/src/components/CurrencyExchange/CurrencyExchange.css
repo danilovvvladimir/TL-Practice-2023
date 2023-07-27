@@ -6,7 +6,7 @@
 
 .currency-exchange__wrapper {
   margin: 0 auto;
-  width: 700px;
+  width: 900px;
   background-color: #fff;
   box-shadow: 20px 20px 30px rgb(0 0 0 / 20%);
   border-radius: 20px;
@@ -28,20 +28,4 @@
 .currency-exchange__payment {
   font-size: 36px;
   color: var(--title-color);
-}
-
-.currency-exchange__content {
-  margin-bottom: 20px;
-}
-
-.currency-exchange__content-date {
-  font-size: 12px;
-  color: var(--description-color);
-  margin-bottom: 12px;
-}
-
-.currency-exchange__content-selects {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
 }

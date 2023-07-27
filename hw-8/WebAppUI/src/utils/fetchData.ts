@@ -1,4 +1,4 @@
-import { API_URL } from "../constants/api";
+import { API_URL } from "../constants/constants";
 
 export const getAllCurrencies = async () => {
   const response = await fetch(`${API_URL}/Currencies`);
@@ -22,7 +22,6 @@ export const getCoefficientBetweenCurrencies = async (
   const queryPurchasedCode = `PurchasedCurrency=${purchasedCurrencyCode}`;
   const queryFromDate = fromDate.toISOString().slice(0, 19) + "Z";
   const queryToDate = toDate ? `&ToDateTime=${toDate.toISOString().slice(0, 19) + "Z"}` : "";
-  console.log(queryFromDate);
 
   const queryString = `?${queryPaymentCode}&${queryPurchasedCode}&${queryFromDate}${queryToDate}'`;
 
