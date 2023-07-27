@@ -36,7 +36,7 @@ const CurrencyChart: FC<CurrencyChartProps> = ({ setCurrentTabIndex, currentTabI
       </div>
       <AreaChart
         dataSet={currentCoefficients.map(coef => coef.price)}
-        labels={currentCoefficients.map(coef => coef.dateTime)}
+        labels={currentCoefficients.map(coef => new Date(coef.dateTime).toUTCString())}
       />
     </div>
   );

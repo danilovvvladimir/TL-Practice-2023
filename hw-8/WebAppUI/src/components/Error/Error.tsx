@@ -1,5 +1,4 @@
 import { FC } from "react";
-
 import "./Error.css";
 
 interface ErrorProps {

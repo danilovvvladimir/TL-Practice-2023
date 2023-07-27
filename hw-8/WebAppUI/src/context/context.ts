@@ -1,10 +1,10 @@
 import { createContext } from "react";
-import { Filter, NewFilter } from "../types/filter";
+import { Filter, CurrentCurrencies } from "../types/filter";
 import { Currency, CurrencyWithAmount } from "../types/currency";
 
 interface FilterContextType {
   filters: Filter[];
-  addFilter: (review: NewFilter) => void;
+  addFilter: (review: CurrentCurrencies) => void;
 }
 
 export const FilterContext = createContext<FilterContextType>({

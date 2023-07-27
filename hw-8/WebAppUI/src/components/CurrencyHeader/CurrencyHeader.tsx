@@ -1,17 +1,12 @@
 import { FC, useContext } from "react";
 import "./CurrencyHeader.css";
 import Button from "../UI/Button/Button";
-import { CurrencyWithAmount } from "../../types/currency";
-import { FilterContext } from "../../context/context";
+import { CurrentCurrenciesContext, FilterContext } from "../../context/context";
 import { roundNumber } from "../../utils/roundNumber";
 
-interface CurrencyHeaderProps {
-  purchasedCurrency: CurrencyWithAmount;
-  paymentCurrency: CurrencyWithAmount;
-}
-
-const CurrencyHeader: FC<CurrencyHeaderProps> = ({ paymentCurrency, purchasedCurrency }) => {
+const CurrencyHeader: FC = () => {
   const { addFilter } = useContext(FilterContext);
+  const { paymentCurrency, purchasedCurrency } = useContext(CurrentCurrenciesContext);
 
   return (
     <div className="currency-exchange__header">

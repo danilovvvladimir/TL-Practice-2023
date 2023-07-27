@@ -8,5 +8,3 @@ export interface CurrentCurrencies {
 export interface Filter extends CurrentCurrencies {
   id: string;
 }
-
-export interface NewFilter extends Omit<Filter, "id"> {}

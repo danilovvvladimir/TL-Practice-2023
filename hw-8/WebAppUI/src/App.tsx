@@ -4,7 +4,7 @@ import { fetchAllCurrencies } from "./utils/fetchData";
 import { Currency, CurrencyWithAmount } from "./types/currency";
 import Error from "./components/Error/Error";
 import Loader from "./components/Loader/Loader";
-import { Filter, NewFilter } from "./types/filter";
+import { Filter, CurrentCurrencies } from "./types/filter";
 import {
   CurrenciesContext,
   CurrentCurrenciesContext,
@@ -16,7 +16,6 @@ import FilterTabs from "./components/FilterTabs/FilterTabs";
 
 const App = () => {
   const [purchasedCurrency, setPurchasedCurrency] = useState<CurrencyWithAmount>(defaultCurrencyWithAmount);
-
   const [paymentCurrency, setPaymentCurrency] = useState<CurrencyWithAmount>(defaultCurrencyWithAmount);
 
   const [currencies, setCurrencies] = useState<Currency[]>([]);
@@ -24,7 +23,7 @@ const App = () => {
 
   const [filters, setFilters] = useState<Filter[]>([]);
 
-  const addFilter = ({ paymentCurrency, purchasedCurrency }: NewFilter) => {
+  const addFilter = ({ paymentCurrency, purchasedCurrency }: CurrentCurrencies) => {
     const newFilter = { paymentCurrency, purchasedCurrency, id: uuidv4() };
 
     setFilters([newFilter, ...filters]);

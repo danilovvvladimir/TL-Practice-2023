@@ -81,7 +81,7 @@ const CurrencyExchange: FC = () => {
     <section className="currency-exchange">
       <div className="container">
         <div className="currency-exchange__wrapper">
-          <CurrencyHeader paymentCurrency={paymentCurrency} purchasedCurrency={purchasedCurrency} />
+          <CurrencyHeader />
 
           {latestCoefficient === undefined ? (
             <Loader>Loading data about current Currency...</Loader>
