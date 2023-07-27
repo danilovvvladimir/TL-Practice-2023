@@ -18,7 +18,7 @@ const Description: FC<DescriptionProps> = ({ paymentCurrency, purchasedCurrency 
   return (
     <div className="currency-exchange__description description">
       <Button className="description__button" onClick={toggleDescriptionVisibility}>
-        {paymentCurrency.code}/{purchasedCurrency.code}: подробнее
+        {paymentCurrency.code}/{purchasedCurrency.code}: about
         <span className="description__arrow">
           {isDescriptionVisible ? (
             <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">

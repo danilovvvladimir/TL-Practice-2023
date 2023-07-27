@@ -1,22 +1,22 @@
-import { FC, useState, useEffect } from "react";
+import { FC, useState, useEffect, useContext } from "react";
 import Description from "../Description/Description";
 import "./CurrencyExchange.css";
-import { Currency, CurrencyCoefficient, CurrencyWithAmount } from "../../types/currency";
+import { Currency, CurrencyCoefficient } from "../../types/currency";
 import { fetchCoefficientBetweenCurrencies, fetchCurrency } from "../../utils/fetchData";
 import { FETCH_API_OFFSET } from "../../constants/constants";
 import CurrencyContent from "../CurrencyContent/CurrencyContent";
 import Loader from "../Loader/Loader";
 import CurrencyHeader from "../CurrencyHeader/CurrencyHeader";
 import { handleCurrencyChange } from "../../utils/handleCurrencyChange";
+import { CurrentCurrenciesContext } from "../../context/context";
 
-interface CurrencyExchangeProps {
-  defaultPurchasedCurrency: CurrencyWithAmount;
-  defaultPaymentCurrency: CurrencyWithAmount;
-}
-
-const CurrencyExchange: FC<CurrencyExchangeProps> = ({ defaultPaymentCurrency, defaultPurchasedCurrency }) => {
-  const [paymentCurrency, setPaymentCurrency] = useState<CurrencyWithAmount>(defaultPaymentCurrency);
-  const [purchasedCurrency, setPurchasedCurrency] = useState<CurrencyWithAmount>(defaultPurchasedCurrency);
+const CurrencyExchange: FC = () => {
+  const {
+    changePaymentCurrency: setPaymentCurrency,
+    changePurchasedCurrency: setPurchasedCurrency,
+    paymentCurrency,
+    purchasedCurrency,
+  } = useContext(CurrentCurrenciesContext);
 
   const [coefficientsHistory, setCoefficientsHistory] = useState<CurrencyCoefficient[]>([]);
 

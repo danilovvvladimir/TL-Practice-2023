@@ -1,15 +1,24 @@
 import { useState, useEffect } from "react";
 import CurrencyExchange from "./components/CurrencyExchange/CurrencyExchange";
 import { fetchAllCurrencies } from "./utils/fetchData";
-import { Currency } from "./types/currency";
+import { Currency, CurrencyWithAmount } from "./types/currency";
 import Error from "./components/Error/Error";
 import Loader from "./components/Loader/Loader";
 import { Filter, NewFilter } from "./types/filter";
-import { CurrenciesContext, FilterContext } from "./context/context";
+import {
+  CurrenciesContext,
+  CurrentCurrenciesContext,
+  FilterContext,
+  defaultCurrencyWithAmount,
+} from "./context/context";
 import { v4 as uuidv4 } from "uuid";
 import FilterTabs from "./components/FilterTabs/FilterTabs";
 
 const App = () => {
+  const [purchasedCurrency, setPurchasedCurrency] = useState<CurrencyWithAmount>(defaultCurrencyWithAmount);
+
+  const [paymentCurrency, setPaymentCurrency] = useState<CurrencyWithAmount>(defaultCurrencyWithAmount);
+
   const [currencies, setCurrencies] = useState<Currency[]>([]);
   const [error, setError] = useState("");
 
@@ -21,9 +30,31 @@ const App = () => {
     setFilters([newFilter, ...filters]);
   };
 
+  const clearFilters = () => {
+    setFilters([]);
+  };
+
+  const getCurrenciesFromTabs = (id: string) => {
+    const neededFilter = filters.filter(f => f.id === id)[0];
+
+    setPaymentCurrency({ amount: 1, ...neededFilter.paymentCurrency });
+    setPurchasedCurrency({ amount: 1, ...neededFilter.purchasedCurrency });
+  };
+
   const getAllCurrencies = async () => {
     const data: Currency[] = await fetchAllCurrencies();
     setCurrencies(data);
+
+    setPurchasedCurrency({ amount: 1, ...data[0] });
+    setPaymentCurrency({ amount: 1, ...data[1] });
+  };
+
+  const changePurchasedCurrency = (newCurrencyWithAmount: CurrencyWithAmount) => {
+    setPurchasedCurrency({ ...newCurrencyWithAmount });
+  };
+
+  const changePaymentCurrency = (newCurrencyWithAmount: CurrencyWithAmount) => {
+    setPaymentCurrency({ ...paymentCurrency, ...newCurrencyWithAmount });
   };
 
   useEffect(() => {
@@ -50,11 +81,12 @@ const App = () => {
   return (
     <FilterContext.Provider value={{ filters, addFilter }}>
       <CurrenciesContext.Provider value={{ currencies }}>
-        <FilterTabs />
-        <CurrencyExchange
-          defaultPaymentCurrency={{ amount: 1, ...currencies[0] }}
-          defaultPurchasedCurrency={{ amount: 1, ...currencies[1] }}
-        />
+        <CurrentCurrenciesContext.Provider
+          value={{ paymentCurrency, purchasedCurrency, changePaymentCurrency, changePurchasedCurrency }}
+        >
+          <FilterTabs getCurrenciesFromTabs={getCurrenciesFromTabs} clearFilters={clearFilters} />
+          <CurrencyExchange />
+        </CurrentCurrenciesContext.Provider>
       </CurrenciesContext.Provider>
     </FilterContext.Provider>
   );

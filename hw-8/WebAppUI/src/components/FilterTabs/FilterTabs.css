@@ -35,3 +35,11 @@
   color: var(--title-color);
   text-transform: uppercase;
 }
+
+.filter-tabs__tab--clear {
+  background-color: #fa3e3b;
+}
+
+.filter-tabs__tab--clear:hover {
+  background-color: #f72b28;
+}
