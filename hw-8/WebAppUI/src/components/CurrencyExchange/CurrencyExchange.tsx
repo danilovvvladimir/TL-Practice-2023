@@ -87,17 +87,13 @@ const CurrencyExchange: FC = () => {
             <Loader>Loading data about current Currency...</Loader>
           ) : (
             <CurrencyContent
-              purchasedCurrency={purchasedCurrency}
-              paymentCurrency={paymentCurrency}
               coefficientsHistory={coefficientsHistory}
               handleCurrencyChange={handleCurrencyChange}
-              setPaymentCurrency={setPaymentCurrency}
-              setPurchasedCurrency={setPurchasedCurrency}
               latestCoefficient={latestCoefficient}
             />
           )}
 
-          <Description paymentCurrency={paymentCurrency} purchasedCurrency={purchasedCurrency} />
+          <Description />
         </div>
       </div>
     </section>

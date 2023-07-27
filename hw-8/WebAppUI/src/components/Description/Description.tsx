@@ -1,15 +1,12 @@
-import { FC, useState } from "react";
+import { FC, useContext, useState } from "react";
 import Button from "../UI/Button/Button";
 import "./Description.css";
-import { Currency } from "../../types/currency";
+import { CurrentCurrenciesContext } from "../../context/context";
 
-interface DescriptionProps {
-  paymentCurrency: Currency;
-  purchasedCurrency: Currency;
-}
-
-const Description: FC<DescriptionProps> = ({ paymentCurrency, purchasedCurrency }) => {
+const Description: FC = () => {
   const [isDescriptionVisible, setIsDescriptionVisible] = useState<boolean>(false);
+
+  const { paymentCurrency, purchasedCurrency } = useContext(CurrentCurrenciesContext);
 
   const toggleDescriptionVisibility = () => {
     setIsDescriptionVisible(isDescriptionVisible => !isDescriptionVisible);

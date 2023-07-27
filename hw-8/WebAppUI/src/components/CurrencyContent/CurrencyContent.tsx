@@ -1,32 +1,31 @@
 import { FC, useState, useEffect, useContext } from "react";
 import "./CurrencyContent.css";
-import { CurrencyCoefficient, CurrencyWithAmount } from "../../types/currency";
+import { CurrencyCoefficient } from "../../types/currency";
 import CurrencySelect from "../CurrencySelect/CurrencySelect";
 import { CHART_BUTTON_LABELS, DOTS_PER_MINUTE } from "../../constants/constants";
 import { HandleCurrencyChangeType } from "../../utils/handleCurrencyChange";
-import { CurrenciesContext } from "../../context/context";
+import { CurrenciesContext, CurrentCurrenciesContext } from "../../context/context";
 import CurrencyChart from "../CurrencyChart/CurrencyChart";
 
 interface CurrencyContentProps {
   latestCoefficient: CurrencyCoefficient;
-  purchasedCurrency: CurrencyWithAmount;
-  paymentCurrency: CurrencyWithAmount;
-  setPurchasedCurrency: (state: CurrencyWithAmount) => void;
-  setPaymentCurrency: (state: CurrencyWithAmount) => void;
   handleCurrencyChange: HandleCurrencyChangeType;
   coefficientsHistory: CurrencyCoefficient[];
 }
 
 const CurrencyContent: FC<CurrencyContentProps> = ({
   latestCoefficient,
-  paymentCurrency,
-  purchasedCurrency,
   handleCurrencyChange,
-  setPurchasedCurrency,
-  setPaymentCurrency,
   coefficientsHistory,
 }) => {
   const { currencies } = useContext(CurrenciesContext);
+
+  const {
+    changePaymentCurrency: setPaymentCurrency,
+    changePurchasedCurrency: setPurchasedCurrency,
+    paymentCurrency,
+    purchasedCurrency,
+  } = useContext(CurrentCurrenciesContext);
 
   const [currentCoefficients, setCurrentCoefficients] = useState<CurrencyCoefficient[]>(
     coefficientsHistory.slice(-DOTS_PER_MINUTE),
