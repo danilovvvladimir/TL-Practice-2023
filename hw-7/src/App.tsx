@@ -1,11 +1,6 @@
-// ==> Libs imports <===
 import { FC, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-
-// ==> Components imports <===
 import Reply from "./components/Reply/Reply";
-
-// ==> Other imports <===
 import { NewReview, Review } from "./types/review";
 import { ReviewsContext } from "./context/context";
 
