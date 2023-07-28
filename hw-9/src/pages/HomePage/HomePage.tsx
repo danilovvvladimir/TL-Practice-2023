@@ -1,21 +1,24 @@
 import { FC } from "react";
 import "./HomePage.scss";
-import { Container } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Container, Button } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 import Title from "../../components/Title/Title";
 
 const HomePage: FC = () => {
+  const navigate = useNavigate();
+
   return (
     <section className="home-page">
       <Container>
         <Title titleMessage="Выберите режим" />
         <div className="home-page__links">
-          <Link to="/dictionary" className="button">
+          <Button variant="contained" onClick={() => navigate("/dictionary")}>
             Заполнить словарь
-          </Link>
-          <Link to="/quiz" className="button button--inverted">
+          </Button>
+
+          <Button variant="inverted" onClick={() => navigate("/quiz")}>
             проверить знания
-          </Link>
+          </Button>
         </div>
       </Container>
     </section>

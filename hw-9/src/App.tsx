@@ -6,6 +6,10 @@ import DictionaryPage from "./pages/DictionaryPage/DictionaryPage";
 import { DictionaryPair, NewDictionaryPair } from "./types/words";
 import { DictionaryContext } from "./context/context";
 import { v4 as uuidv4 } from "uuid";
+import { ThemeProvider } from "@mui/material/styles";
+import { THEME } from "./constants/theme";
+import AddWordPage from "./pages/AddWordPage/AddWordPage";
+import EditWordPage from "./pages/EditWordPage/EditWordPage";
 
 function App() {
   const [dictionaryPairs, setDictionaryPairs] = useState<DictionaryPair[]>([]);
@@ -31,15 +35,19 @@ function App() {
   };
 
   return (
-    <DictionaryContext.Provider
-      value={{ dictionaryPairs, addDictionaryPair, removeDictionaryPair, editDictionaryPair }}
-    >
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/quiz" element={<QuizPage />} />
-        <Route path="/dictionary" element={<DictionaryPage />} />
-      </Routes>
-    </DictionaryContext.Provider>
+    <ThemeProvider theme={THEME}>
+      <DictionaryContext.Provider
+        value={{ dictionaryPairs, addDictionaryPair, removeDictionaryPair, editDictionaryPair }}
+      >
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/quiz" element={<QuizPage />} />
+          <Route path="/dictionary" element={<DictionaryPage />} />
+          <Route path="/dictionary/add-word" element={<AddWordPage />} />
+          <Route path="/dictionary/edit-word" element={<EditWordPage />} />
+        </Routes>
+      </DictionaryContext.Provider>
+    </ThemeProvider>
   );
 }
 
