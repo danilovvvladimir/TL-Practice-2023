@@ -1,0 +1,13 @@
+$accent-color: #1565c0;
+$accent-hover-color: #125baf;
+$white-hover-color: #e2e2e2;
+$title-color: #364963;
+$border-color: #cfd7e2;
+
+@mixin RobotoCondensedFont {
+  font-family: "Roboto Condensed", sans-serif;
+}
+
+@mixin OpenSansFont {
+  font-family: "Open Sans", sans-serif;
+}

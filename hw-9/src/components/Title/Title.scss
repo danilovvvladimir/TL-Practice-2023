@@ -1,0 +1,22 @@
+@import "../../variables.scss";
+
+.title-box {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 28px;
+  &__button {
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid $border-color;
+  }
+}
+
+.title {
+  font-size: 48px;
+  color: $title-color;
+  font-weight: 400;
+}
