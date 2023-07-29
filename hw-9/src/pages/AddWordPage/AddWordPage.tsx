@@ -1,14 +1,35 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import "./AddWordPage.scss";
 import { Container, Paper, Divider, TextField, FormControl, Button } from "@mui/material";
 import Title from "../../components/Title/Title";
 import { useNavigate } from "react-router-dom";
+import { useWordsStore } from "../../store/state";
 
 const AddWordPage: FC = () => {
+  const [russianWord, setRussianWord] = useState("");
+  const [englishWord, setEnglishWord] = useState("");
+
+  const { words, addDictionaryPair } = useWordsStore();
+
   const navigate = useNavigate();
+
   const handleSaving = () => {
-    console.log("adding to words");
-    navigate("/dictionary");
+    if (!russianWord || !englishWord) {
+      return;
+    }
+
+    if (words.filter(word => word.russianWord == russianWord && word.englishWord == englishWord)) {
+      alert("У вас уже есть такая пара в словаре");
+      return;
+    }
+    addDictionaryPair({ englishWord, russianWord });
+
+    resetForm();
+  };
+
+  const resetForm = () => {
+    setEnglishWord("");
+    setRussianWord("");
   };
 
   return (
@@ -25,7 +46,12 @@ const AddWordPage: FC = () => {
                   <label className="add-word-page__content-label" htmlFor="russian-word">
                     Слово на русском языке
                   </label>
-                  <TextField id="russian-word" variant="outlined" />
+                  <TextField
+                    id="russian-word"
+                    variant="outlined"
+                    value={russianWord}
+                    onChange={e => setRussianWord(e.target.value)}
+                  />
                 </div>
               </FormControl>
               <FormControl>
@@ -33,7 +59,12 @@ const AddWordPage: FC = () => {
                   <label className="add-word-page__content-label" htmlFor="english-word">
                     Перевод на английский язык
                   </label>
-                  <TextField id="english-word" variant="outlined" />
+                  <TextField
+                    id="english-word"
+                    variant="outlined"
+                    value={englishWord}
+                    onChange={e => setEnglishWord(e.target.value)}
+                  />
                 </div>
               </FormControl>
             </div>

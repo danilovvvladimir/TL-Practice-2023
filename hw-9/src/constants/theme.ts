@@ -48,6 +48,7 @@ export const THEME = createTheme({
     MuiButton: {
       styleOverrides: {
         root: {
+          minWidth: "36px",
           paddingLeft: "8px",
           paddingRight: "8px",
           fontWeight: 700,
@@ -63,6 +64,16 @@ export const THEME = createTheme({
           },
         },
       ],
+    },
+    MuiTableCell: {
+      styleOverrides: {
+        root: {
+          color: "#364963",
+          padding: "14px 16px 14px 22px",
+          fontSize: "14px",
+          lineHeight: "20px",
+        },
+      },
     },
   },
 });

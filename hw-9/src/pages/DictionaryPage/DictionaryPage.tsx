@@ -5,6 +5,7 @@ import Title from "../../components/Title/Title";
 import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
 import { useWordsStore } from "../../store/state";
+import WordsTable from "../../components/WordsTable/WordsTable";
 
 const DictionaryPage: FC = () => {
   const dictionaryPairs = useWordsStore(state => state.words);
@@ -14,18 +15,12 @@ const DictionaryPage: FC = () => {
     <section className="dictionary-page">
       <Container>
         <Title titleMessage="Словарь" returnButtonPath="/" />
+
         <div className="dictionary-page__content">
-          {dictionaryPairs.length > 0 ? (
-            dictionaryPairs.map(dp => (
-              <div key={dp.id}>
-                {dp.russianWord} - {dp.englishWord}{" "}
-              </div>
-            ))
-          ) : (
-            <Button startIcon={<AddIcon />} variant="contained" onClick={() => navigate("/dictionary/add-word")}>
-              Добавить слово
-            </Button>
-          )}
+          <Button startIcon={<AddIcon />} variant="contained" onClick={() => navigate("/dictionary/add-word")}>
+            Добавить слово
+          </Button>
+          {dictionaryPairs.length > 0 && <WordsTable rows={dictionaryPairs} />}
         </div>
       </Container>
     </section>
