@@ -8,6 +8,7 @@ import MenuItem from "@mui/material/MenuItem";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import { useWordsStore } from "../../store/state";
+import { useNavigate } from "react-router-dom";
 
 interface WordsTableProps {
   rows: DictionaryPair[];
@@ -16,20 +17,31 @@ interface WordsTableProps {
 const WordsTable: FC<WordsTableProps> = ({ rows }) => {
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
-  const open = Boolean(anchorEl);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
 
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const open = Boolean(anchorEl);
+  const navigate = useNavigate();
+
+  const handleClick = (event: React.MouseEvent<HTMLButtonElement>, id: string) => {
+    setSelectedId(id);
     setAnchorEl(event.currentTarget);
   };
 
   const handleClose = () => {
+    setSelectedId(null);
     setAnchorEl(null);
   };
 
   const removeDictionaryPair = useWordsStore(state => state.removeDictionaryPair);
+
   const handleRemovePair = (id: string) => {
     handleClose();
     removeDictionaryPair(id);
+  };
+
+  const handleUpdatePair = (id: string) => {
+    handleClose();
+    navigate(`/dictionary/edit-word/${id}`);
   };
 
   return (
@@ -48,18 +60,23 @@ const WordsTable: FC<WordsTableProps> = ({ rows }) => {
               <TableCell>{capitalizeWord(row.russianWord)}</TableCell>
               <TableCell>{capitalizeWord(row.englishWord)}</TableCell>
               <TableCell align="right">
-                <Button variant="inverted" sx={{ width: "36px", height: "36px", padding: 0 }} onClick={handleClick}>
+                <Button
+                  data-word-id={row.id}
+                  variant="inverted"
+                  sx={{ width: "36px", height: "36px", padding: 0 }}
+                  onClick={event => handleClick(event, row.id)}
+                >
                   <MenuIcon width={18} height={18} />
                 </Button>
                 <Menu
                   anchorEl={anchorEl}
-                  open={open}
+                  open={open && row.id === selectedId}
                   onClose={handleClose}
                   anchorOrigin={{ vertical: "bottom", horizontal: -136 }}
                   TransitionComponent={Fade}
                 >
                   <div className="menu">
-                    <MenuItem onClick={handleClose}>
+                    <MenuItem onClick={() => handleUpdatePair(row.id)}>
                       <div className="menu__item">
                         <div className="menu__item-icon">
                           <EditOutlinedIcon />

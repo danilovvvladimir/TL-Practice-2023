@@ -15,7 +15,7 @@ function App() {
         <Route path="/quiz" element={<QuizPage />} />
         <Route path="/dictionary" element={<DictionaryPage />} />
         <Route path="/dictionary/add-word" element={<AddWordPage />} />
-        <Route path="/dictionary/edit-word" element={<EditWordPage />} />
+        <Route path="/dictionary/edit-word/:id" element={<EditWordPage />} />
       </Routes>
     </ThemeProvider>
   );
