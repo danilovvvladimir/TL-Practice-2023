@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 
 const NotFoundPage: FC = () => {
   const navigate = useNavigate();
+
   return (
     <section className="not-found-page">
       <Container>

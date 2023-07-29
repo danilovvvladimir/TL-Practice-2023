@@ -1,19 +1,18 @@
 @import "../../variables.scss";
 
-.word-form {
-  &__content-title {
-    @include RobotoCondensedFont;
-    padding: 20px;
-    font-size: 24px;
-    font-style: normal;
-    font-weight: 400;
-    line-height: 28px;
-    color: $title-color;
+.quiz-game {
+  &__round {
+    color: #476185;
+    @include OpenSansFont;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 24px;
+    margin-bottom: 16px;
   }
+
   &__content-inputs {
     display: flex;
     flex-direction: column;
-    padding: 20px;
     gap: 16px;
   }
   &__content-input {
