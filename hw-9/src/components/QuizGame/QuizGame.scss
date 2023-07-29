@@ -1,23 +1,28 @@
 @import "../../variables.scss";
 
 .quiz-game {
-  &__round {
-    color: #476185;
+  &__info {
     @include OpenSansFont;
     font-size: 14px;
     font-weight: 700;
     line-height: 24px;
+    color: #476185;
     margin-bottom: 16px;
   }
-
-  &__content-inputs {
+  &__content {
     display: flex;
     flex-direction: column;
     gap: 16px;
   }
-  &__content-input {
+  &__content-field {
     display: flex;
     align-items: center;
+  }
+  &__content-riddle {
+    background-color: #eff2f5;
+    border-radius: 4px;
+    width: 236px;
+    padding: 8px;
   }
   &__content-label {
     @include OpenSansFont;
@@ -30,5 +35,21 @@
   &__buttons {
     display: flex;
     gap: 16px;
+  }
+  &__hint {
+    width: auto;
+    text-align: center;
+    text-transform: uppercase;
+    padding: 8px;
+    border-radius: 4px;
+    font-weight: 700;
+    &--correct {
+      color: $title-color;
+      background-color: #a4fd81;
+    }
+    &--incorrect {
+      color: #fff;
+      background-color: rgb(255, 74, 74);
+    }
   }
 }

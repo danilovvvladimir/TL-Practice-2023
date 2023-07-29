@@ -75,5 +75,12 @@ export const THEME = createTheme({
         },
       },
     },
+    MuiSelect: {
+      styleOverrides: {
+        select: {
+          padding: 8,
+        },
+      },
+    },
   },
 });
