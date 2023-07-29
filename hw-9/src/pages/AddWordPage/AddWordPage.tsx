@@ -18,10 +18,11 @@ const AddWordPage: FC = () => {
       return;
     }
 
-    if (words.filter(word => word.russianWord == russianWord && word.englishWord == englishWord)) {
+    if (words.find(word => word.russianWord == russianWord && word.englishWord == englishWord)) {
       alert("У вас уже есть такая пара в словаре");
       return;
     }
+
     addDictionaryPair({ englishWord, russianWord });
 
     resetForm();
