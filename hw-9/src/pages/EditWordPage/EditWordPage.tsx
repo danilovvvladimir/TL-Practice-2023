@@ -3,22 +3,37 @@ import "./EditWordPage.scss";
 import { useParams } from "react-router-dom";
 import Title from "../../components/Title/Title";
 import { useWordsStore } from "../../store/state";
+import { Container } from "@mui/material";
+import WordForm from "../../components/WordForm/WordForm";
+import NotFoundPage from "../NotFoundPage/NotFoundPage";
 
 const EditWordPage: FC = () => {
   const { id } = useParams<{ id: string }>();
 
-  const { words } = useWordsStore();
+  const { words, updateDictionaryPair } = useWordsStore();
 
   const neededDictionaryPair = words.find(word => word.id === id);
 
-  if (!neededDictionaryPair) {
-    // to 404notfound
-    return <div>not found</div>;
+  if (!neededDictionaryPair || !id) {
+    return <NotFoundPage />;
   }
+
+  const handleSaving = (russianWord: string, englishWord: string) => {
+    console.log(russianWord, englishWord);
+
+    if (!russianWord || !englishWord) {
+      return;
+    }
+
+    updateDictionaryPair(id, { russianWord, englishWord });
+  };
+
   return (
     <section className="edit-word-page">
-      <Title titleMessage="Редактирование слова" returnButtonPath="/dictionary" />
-      {neededDictionaryPair.russianWord} - {neededDictionaryPair.englishWord}
+      <Container>
+        <Title titleMessage="Редактирование слова" returnButtonPath="/dictionary" />
+        <WordForm handleSaving={handleSaving} defaultValues={neededDictionaryPair} />
+      </Container>
     </section>
   );
 };

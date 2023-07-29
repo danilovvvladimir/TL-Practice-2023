@@ -6,6 +6,7 @@ import { ThemeProvider } from "@mui/material/styles";
 import { THEME } from "./constants/theme";
 import AddWordPage from "./pages/AddWordPage/AddWordPage";
 import EditWordPage from "./pages/EditWordPage/EditWordPage";
+import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/dictionary" element={<DictionaryPage />} />
         <Route path="/dictionary/add-word" element={<AddWordPage />} />
         <Route path="/dictionary/edit-word/:id" element={<EditWordPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </ThemeProvider>
   );
