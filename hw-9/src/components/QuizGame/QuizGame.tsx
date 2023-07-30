@@ -1,14 +1,15 @@
-import { FC, useState, useEffect, useRef } from "react";
+import { FC, useState, useEffect } from "react";
 import "./QuizGame.scss";
 import { useWordsStore } from "../../store/state";
-import { Button, FormControl, Paper, Select, TextField, MenuItem } from "@mui/material";
+import { Button, FormControl, Paper, Select, MenuItem } from "@mui/material";
 import { getRandomElements } from "../../utils/getRandomElements";
-import QuizGameFinal from "./QuizGameFinal";
 import { DictionaryPair } from "../../types/words";
 import { getRandomIndex } from "../../utils/getRandomIndex";
 import { QuizGameHint, QuizGameInfo } from "../../types/quiz";
 import { shuffleArray } from "../../utils/shuffleArray";
 import { capitalizeWord } from "../../utils/capitalizeWord";
+import QuizResultPage from "../../pages/QuizResultPage/QuizResultPage";
+import Title from "../Title/Title";
 
 const QuizGame: FC = () => {
   const { words } = useWordsStore();
@@ -21,6 +22,7 @@ const QuizGame: FC = () => {
   const [userChoice, setUserChoice] = useState("none");
   const [userAnswers, setUserAnswers] = useState<QuizGameInfo>({ correct: 0, incorrect: 0 });
   const [hintMessage, setHintMessage] = useState<QuizGameHint | null>(null);
+  const [isNextRoundDisabled, setIsNextRoundDisabled] = useState<boolean>(false);
 
   const handleCheck = () => {
     setRound(round => round + 1);
@@ -38,6 +40,10 @@ const QuizGame: FC = () => {
         message: `Неправильно! ${currentQuizPair.russianWord} - ${currentQuizPair.englishWord}, а не ${userChoice}`,
       });
     }
+
+    if (round < words.length - 1) {
+      setIsNextRoundDisabled(true);
+    }
   };
 
   const handleNewRound = () => {
@@ -45,6 +51,7 @@ const QuizGame: FC = () => {
       handleCreatingNewWord();
       setHintMessage(null);
     }
+    setIsNextRoundDisabled(false);
   };
 
   const handleCreatingNewWord = () => {
@@ -60,12 +67,13 @@ const QuizGame: FC = () => {
     handleCreatingNewWord();
   }, []);
 
-  if (round > words.length) {
-    return <QuizGameFinal userAnswers={userAnswers} />;
+  if (round < words.length) {
+    return <QuizResultPage userAnswers={userAnswers} />;
   }
 
   return (
     <div className="quiz-game">
+      <Title titleMessage="Проверка знаний" returnButtonPath="/" />
       <div className="quiz-game__info">
         Слово: {round} из {words.length}
       </div>
@@ -81,7 +89,12 @@ const QuizGame: FC = () => {
               <label className="quiz-game__content-label" htmlFor="english-word">
                 Перевод на английский язык
               </label>
-              <Select value={userChoice} onChange={event => setUserChoice(event.target.value)} sx={{ width: "235px" }}>
+              <Select
+                disabled={isNextRoundDisabled}
+                value={userChoice}
+                onChange={event => setUserChoice(event.target.value)}
+                sx={{ width: "235px" }}
+              >
                 <MenuItem value="none" disabled>
                   Не выбрано
                 </MenuItem>
@@ -108,10 +121,10 @@ const QuizGame: FC = () => {
         )}
       </Paper>
       <div className="quiz-game__buttons">
-        <Button variant="contained" onClick={handleCheck}>
-          Проверить
+        <Button disabled={isNextRoundDisabled} variant="contained" onClick={handleCheck}>
+          {round !== words.length ? "Проверить" : "Завершить"}
         </Button>
-        {(hintMessage || round == words.length) && (
+        {hintMessage && round !== words.length && (
           <Button variant="inverted" onClick={handleNewRound}>
             Дальше
           </Button>

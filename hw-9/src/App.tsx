@@ -7,6 +7,7 @@ import { THEME } from "./constants/theme";
 import AddWordPage from "./pages/AddWordPage/AddWordPage";
 import EditWordPage from "./pages/EditWordPage/EditWordPage";
 import NotFoundPage from "./pages/NotFoundPage/NotFoundPage";
+import QuizResultPage from "./pages/QuizResultPage/QuizResultPage";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/quiz" element={<QuizPage />} />
+        <Route path="/quiz/result" element={<QuizResultPage />} />
         <Route path="/dictionary" element={<DictionaryPage />} />
         <Route path="/dictionary/add-word" element={<AddWordPage />} />
         <Route path="/dictionary/edit-word/:id" element={<EditWordPage />} />

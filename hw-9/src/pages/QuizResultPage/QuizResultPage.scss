@@ -1,0 +1,26 @@
+.quiz-game__final {
+  &-header {
+    color: #296dc2;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+  &-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #395173;
+    padding: 8px 0;
+  }
+  &-block-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  &-block-result {
+    font-weight: 700;
+  }
+  &-buttons {
+    display: flex;
+    gap: 16px;
+  }
+}

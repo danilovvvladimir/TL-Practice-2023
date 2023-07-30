@@ -1,7 +1,6 @@
 import { FC } from "react";
 import { Container } from "@mui/material";
 import "./QuizPage.scss";
-import Title from "../../components/Title/Title";
 import { useWordsStore } from "../../store/state";
 import QuizGame from "../../components/QuizGame/QuizGame";
 
@@ -11,7 +10,6 @@ const QuizPage: FC = () => {
   return (
     <section className="quiz-page">
       <Container>
-        <Title titleMessage="Проверка знаний" returnButtonPath="/" />
         {words.length >= 4 ? (
           <QuizGame />
         ) : (
