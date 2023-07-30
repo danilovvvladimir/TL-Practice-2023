@@ -1,8 +1,8 @@
 import { FC, useContext } from "react";
 
 import "./FilterTabs.css";
-import { FilterContext } from "../../context/context";
 import Button from "../UI/Button/Button";
+import { FilterContext } from "../../context/fitler";
 
 interface FilterTabsProps {
   getCurrenciesFromTabs: (id: string) => void;

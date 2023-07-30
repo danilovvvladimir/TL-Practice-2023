@@ -5,18 +5,15 @@ import { Currency, CurrencyWithAmount } from "./types/currency";
 import Error from "./components/Error/Error";
 import Loader from "./components/Loader/Loader";
 import { Filter, CurrentCurrencies } from "./types/filter";
-import {
-  CurrenciesContext,
-  CurrentCurrenciesContext,
-  FilterContext,
-  defaultCurrencyWithAmount,
-} from "./context/context";
 import { v4 as uuidv4 } from "uuid";
+import { CurrentCurrenciesContext, initialCurrencyWithAmount } from "./context/currentCurrencies";
 import FilterTabs from "./components/FilterTabs/FilterTabs";
+import { FilterContext } from "./context/fitler";
+import { CurrenciesContext } from "./context/currencies";
 
 const App = () => {
-  const [purchasedCurrency, setPurchasedCurrency] = useState<CurrencyWithAmount>(defaultCurrencyWithAmount);
-  const [paymentCurrency, setPaymentCurrency] = useState<CurrencyWithAmount>(defaultCurrencyWithAmount);
+  const [purchasedCurrency, setPurchasedCurrency] = useState<CurrencyWithAmount>(initialCurrencyWithAmount);
+  const [paymentCurrency, setPaymentCurrency] = useState<CurrencyWithAmount>(initialCurrencyWithAmount);
 
   const [currencies, setCurrencies] = useState<Currency[]>([]);
   const [error, setError] = useState("");

@@ -4,8 +4,9 @@ import { CurrencyCoefficient } from "../../types/currency";
 import CurrencySelect from "../CurrencySelect/CurrencySelect";
 import { CHART_BUTTON_LABELS, DOTS_PER_MINUTE } from "../../constants/constants";
 import { HandleCurrencyChangeType } from "../../utils/handleCurrencyChange";
-import { CurrenciesContext, CurrentCurrenciesContext } from "../../context/context";
+import { CurrentCurrenciesContext } from "../../context/currentCurrencies";
 import CurrencyChart from "../CurrencyChart/CurrencyChart";
+import { CurrenciesContext } from "../../context/currencies";
 
 interface CurrencyContentProps {
   latestCoefficient: CurrencyCoefficient;

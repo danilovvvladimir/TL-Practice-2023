@@ -1,8 +1,9 @@
 import { FC, useContext } from "react";
 import "./CurrencyHeader.css";
 import Button from "../UI/Button/Button";
-import { CurrentCurrenciesContext, FilterContext } from "../../context/context";
+import { CurrentCurrenciesContext } from "../../context/currentCurrencies";
 import { roundNumber } from "../../utils/roundNumber";
+import { FilterContext } from "../../context/fitler";
 
 const CurrencyHeader: FC = () => {
   const { addFilter } = useContext(FilterContext);

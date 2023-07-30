@@ -1,7 +1,7 @@
 import { FC, useContext, useState } from "react";
 import Button from "../UI/Button/Button";
 import "./Description.css";
-import { CurrentCurrenciesContext } from "../../context/context";
+import { CurrentCurrenciesContext } from "../../context/currentCurrencies";
 
 const Description: FC = () => {
   const [isDescriptionVisible, setIsDescriptionVisible] = useState<boolean>(false);

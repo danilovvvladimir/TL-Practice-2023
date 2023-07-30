@@ -8,7 +8,7 @@ import CurrencyContent from "../CurrencyContent/CurrencyContent";
 import Loader from "../Loader/Loader";
 import CurrencyHeader from "../CurrencyHeader/CurrencyHeader";
 import { handleCurrencyChange } from "../../utils/handleCurrencyChange";
-import { CurrentCurrenciesContext } from "../../context/context";
+import { CurrentCurrenciesContext } from "../../context/currentCurrencies";
 
 const CurrencyExchange: FC = () => {
   const {
@@ -30,9 +30,8 @@ const CurrencyExchange: FC = () => {
   const getCoefficient = async (
     paymentCurrencyCode: string,
     purchasedCurrencyCode: string,
-    fromDate: Date = new Date(),
   ): Promise<CurrencyCoefficient[]> => {
-    const data = await fetchCoefficientBetweenCurrencies(paymentCurrencyCode, purchasedCurrencyCode, fromDate);
+    const data = await fetchCoefficientBetweenCurrencies(paymentCurrencyCode, purchasedCurrencyCode);
     return data;
   };
 
