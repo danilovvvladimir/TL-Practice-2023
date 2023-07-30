@@ -4,7 +4,7 @@ import { Button, Container } from "@mui/material";
 import Title from "../../components/Title/Title";
 import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
-import { useWordsStore } from "../../store/state";
+import { useWordsStore } from "../../store/dictionary";
 import WordsTable from "../../components/WordsTable/WordsTable";
 
 const DictionaryPage: FC = () => {

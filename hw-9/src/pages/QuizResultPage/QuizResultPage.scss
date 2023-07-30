@@ -1,25 +1,25 @@
-.quiz-game__final {
-  &-header {
+.quiz-result-page {
+  &__header {
     color: #296dc2;
     font-weight: 700;
     margin-bottom: 8px;
   }
-  &-block {
+  &__block {
     display: flex;
     justify-content: space-between;
     align-items: center;
     color: #395173;
     padding: 8px 0;
   }
-  &-block-label {
+  &__block-label {
     display: flex;
     align-items: center;
     gap: 8px;
   }
-  &-block-result {
+  &__block-result {
     font-weight: 700;
   }
-  &-buttons {
+  &__buttons {
     display: flex;
     gap: 16px;
   }

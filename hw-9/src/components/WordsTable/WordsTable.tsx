@@ -7,7 +7,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
-import { useWordsStore } from "../../store/state";
+import { useWordsStore } from "../../store/dictionary";
 import { useNavigate } from "react-router-dom";
 
 interface WordsTableProps {

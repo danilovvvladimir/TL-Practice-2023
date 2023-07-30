@@ -1,18 +1,22 @@
 import { FC, useState, useEffect } from "react";
 import "./QuizGame.scss";
-import { useWordsStore } from "../../store/state";
+import { useWordsStore } from "../../store/dictionary";
 import { Button, FormControl, Paper, Select, MenuItem } from "@mui/material";
 import { getRandomElements } from "../../utils/getRandomElements";
 import { DictionaryPair } from "../../types/words";
 import { getRandomIndex } from "../../utils/getRandomIndex";
-import { QuizGameHint, QuizGameInfo } from "../../types/quiz";
+import { QuizGameHint } from "../../types/quiz";
 import { shuffleArray } from "../../utils/shuffleArray";
 import { capitalizeWord } from "../../utils/capitalizeWord";
-import QuizResultPage from "../../pages/QuizResultPage/QuizResultPage";
-import Title from "../Title/Title";
+
+import { useQuizStore } from "../../store/quiz";
+import { useNavigate } from "react-router-dom";
 
 const QuizGame: FC = () => {
+  const navigate = useNavigate();
+
   const { words } = useWordsStore();
+  const { userAnswers, setUserAnswers } = useQuizStore();
 
   const [round, setRound] = useState(1);
   const [leftWords, setLeftWords] = useState<DictionaryPair[]>(words);
@@ -20,13 +24,10 @@ const QuizGame: FC = () => {
   const [randomAnswers, setRandomAnswers] = useState<string[]>([]);
 
   const [userChoice, setUserChoice] = useState("none");
-  const [userAnswers, setUserAnswers] = useState<QuizGameInfo>({ correct: 0, incorrect: 0 });
   const [hintMessage, setHintMessage] = useState<QuizGameHint | null>(null);
   const [isNextRoundDisabled, setIsNextRoundDisabled] = useState<boolean>(false);
 
   const handleCheck = () => {
-    setRound(round => round + 1);
-
     if (userChoice === currentQuizPair.englishWord) {
       setUserAnswers({ ...userAnswers, correct: userAnswers.correct + 1 });
       setHintMessage({
@@ -41,16 +42,17 @@ const QuizGame: FC = () => {
       });
     }
 
-    if (round < words.length - 1) {
-      setIsNextRoundDisabled(true);
-    }
+    setIsNextRoundDisabled(true);
   };
 
   const handleNewRound = () => {
+    setRound(round => round + 1);
+
     if (round < words.length) {
       handleCreatingNewWord();
       setHintMessage(null);
     }
+
     setIsNextRoundDisabled(false);
   };
 
@@ -67,13 +69,13 @@ const QuizGame: FC = () => {
     handleCreatingNewWord();
   }, []);
 
-  if (round < words.length) {
-    return <QuizResultPage userAnswers={userAnswers} />;
-  }
+  const handleRedirectToResult = () => {
+    handleCheck();
+    navigate("/quiz/result");
+  };
 
   return (
     <div className="quiz-game">
-      <Title titleMessage="Проверка знаний" returnButtonPath="/" />
       <div className="quiz-game__info">
         Слово: {round} из {words.length}
       </div>
@@ -121,9 +123,15 @@ const QuizGame: FC = () => {
         )}
       </Paper>
       <div className="quiz-game__buttons">
-        <Button disabled={isNextRoundDisabled} variant="contained" onClick={handleCheck}>
-          {round !== words.length ? "Проверить" : "Завершить"}
-        </Button>
+        {round !== words.length ? (
+          <Button disabled={isNextRoundDisabled} variant="contained" onClick={handleCheck}>
+            Проверить
+          </Button>
+        ) : (
+          <Button disabled={isNextRoundDisabled} variant="contained" onClick={handleRedirectToResult}>
+            Завершить
+          </Button>
+        )}
         {hintMessage && round !== words.length && (
           <Button variant="inverted" onClick={handleNewRound}>
             Дальше

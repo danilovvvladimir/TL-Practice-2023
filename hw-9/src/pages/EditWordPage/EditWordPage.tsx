@@ -2,7 +2,7 @@ import { FC } from "react";
 import "./EditWordPage.scss";
 import { useParams } from "react-router-dom";
 import Title from "../../components/Title/Title";
-import { useWordsStore } from "../../store/state";
+import { useWordsStore } from "../../store/dictionary";
 import { Container } from "@mui/material";
 import WordForm from "../../components/WordForm/WordForm";
 import NotFoundPage from "../NotFoundPage/NotFoundPage";

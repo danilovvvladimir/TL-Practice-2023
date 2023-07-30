@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Container } from "@mui/material";
 import Title from "../../components/Title/Title";
-import { useWordsStore } from "../../store/state";
+import { useWordsStore } from "../../store/dictionary";
 import WordForm from "../../components/WordForm/WordForm";
 
 const AddWordPage: FC = () => {
