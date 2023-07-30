@@ -1,7 +1,7 @@
 import { FC, useState, useEffect } from "react";
 import { useWordsStore } from "../../store/dictionary";
 import { Button, FormControl, Paper, Select, MenuItem } from "@mui/material";
-import { getRandomElements } from "../../utils/getRandomElements";
+import { getRandomDictionaryPair } from "../../utils/getRandomDictionaryPair";
 import { DictionaryPair } from "../../types/dictionary";
 import { getRandomArrayIndex } from "../../utils/getRandomArrayIndex";
 import { QuizGameHint } from "../../types/quiz";
@@ -60,7 +60,7 @@ const QuizGame: FC = () => {
 
     setCurrentQuizPair(newWord);
     setLeftWords(leftWords.filter(word => word.id !== newWord.id));
-    setRandomAnswers(shuffleArray([newWord.englishWord, ...getRandomElements(words, newWord.englishWord, 3)]));
+    setRandomAnswers(shuffleArray([newWord.englishWord, ...getRandomDictionaryPair(words, newWord.englishWord, 3)]));
     setUserChoice("none");
   };
 

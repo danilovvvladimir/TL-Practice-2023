@@ -1,6 +1,11 @@
 import { DictionaryPair } from "../types/dictionary";
+import { getRandomArrayIndex } from "./getRandomArrayIndex";
 
-export const getRandomElements = (array: DictionaryPair[], correctWord: string, numElements: number): string[] => {
+export const getRandomDictionaryPair = (
+  array: DictionaryPair[],
+  correctWord: string,
+  numElements: number,
+): string[] => {
   if (numElements >= array.length) {
     return array.map(dp => dp.englishWord);
   }
@@ -9,8 +14,9 @@ export const getRandomElements = (array: DictionaryPair[], correctWord: string, 
   const result: string[] = [];
 
   while (result.length < numElements) {
-    const randomIndex = Math.floor(Math.random() * shuffledArray.length);
+    const randomIndex = getRandomArrayIndex(shuffledArray);
     const [selectedElement] = shuffledArray.splice(randomIndex, 1);
+
     if (selectedElement.englishWord !== correctWord) {
       result.push(selectedElement.englishWord);
     }
