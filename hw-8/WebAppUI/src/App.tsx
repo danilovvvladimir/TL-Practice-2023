@@ -12,8 +12,6 @@ import { FilterContext } from "./context/fitler";
 import { CurrenciesContext } from "./context/currencies";
 
 const App = () => {
-  console.log("APP RENDERED");
-
   const [purchasedCurrency, setPurchasedCurrency] = useState<CurrencyWithAmount>(initialCurrencyWithAmount);
   const [paymentCurrency, setPaymentCurrency] = useState<CurrencyWithAmount>(initialCurrencyWithAmount);
 
@@ -40,8 +38,6 @@ const App = () => {
   };
 
   const getAllCurrencies = async () => {
-    console.log("getAllCurrencies");
-
     const data: Currency[] = await fetchAllCurrencies();
     setCurrencies(data);
 
