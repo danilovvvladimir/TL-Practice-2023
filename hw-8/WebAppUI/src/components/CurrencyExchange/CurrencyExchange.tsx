@@ -1,14 +1,15 @@
 import { FC, useState, useEffect, useContext } from "react";
 import Description from "../Description/Description";
 import "./CurrencyExchange.css";
-import { Currency, CurrencyCoefficient } from "../../types/currency";
-import { fetchCoefficientBetweenCurrencies, fetchCurrency } from "../../utils/fetchData";
+import { Currency, CurrencyCoefficient, CurrencyWithAmount } from "../../types/currency";
+import { fetchCoefficientBetweenCurrencies } from "../../utils/fetchData";
 import { FETCH_API_OFFSET } from "../../constants/constants";
 import CurrencyContent from "../CurrencyContent/CurrencyContent";
 import Loader from "../Loader/Loader";
 import CurrencyHeader from "../CurrencyHeader/CurrencyHeader";
 import { handleCurrencyChange } from "../../utils/handleCurrencyChange";
 import { CurrentCurrenciesContext } from "../../context/currentCurrencies";
+import { CurrenciesContext } from "../../context/currencies";
 
 const CurrencyExchange: FC = () => {
   const {
@@ -18,25 +19,14 @@ const CurrencyExchange: FC = () => {
     purchasedCurrency,
   } = useContext(CurrentCurrenciesContext);
 
+  const { currencies } = useContext(CurrenciesContext);
+
   const [coefficientsHistory, setCoefficientsHistory] = useState<CurrencyCoefficient[]>([]);
 
   const [latestCoefficient, setLatestCoefficient] = useState<CurrencyCoefficient | undefined>(undefined);
 
-  const getCurrencyByCode = async (code: string) => {
-    const data = await fetchCurrency(code);
-    return data;
-  };
-
-  const getCoefficient = async (
-    paymentCurrencyCode: string,
-    purchasedCurrencyCode: string,
-  ): Promise<CurrencyCoefficient[]> => {
-    const data = await fetchCoefficientBetweenCurrencies(paymentCurrencyCode, purchasedCurrencyCode);
-    return data;
-  };
-
   const updatePaymentCurrency = async () => {
-    const newPaymentCurrency: Currency = await getCurrencyByCode(paymentCurrency.code);
+    const newPaymentCurrency: Currency = currencies.find(c => c.code === paymentCurrency.code) as Currency;
 
     setPaymentCurrency({
       amount: paymentCurrency.amount,
@@ -45,7 +35,7 @@ const CurrencyExchange: FC = () => {
   };
 
   const updatePurchasedCurrency = async () => {
-    const newPurchasedCurrency: Currency = await getCurrencyByCode(purchasedCurrency.code);
+    const newPurchasedCurrency: Currency = currencies.find(c => c.code === purchasedCurrency.code) as Currency;
 
     setPurchasedCurrency({
       ...newPurchasedCurrency,
@@ -53,28 +43,34 @@ const CurrencyExchange: FC = () => {
     });
   };
 
-  const updateCoefficientsHistory = async () => {
-    const data: CurrencyCoefficient[] = await getCoefficient(purchasedCurrency.code, paymentCurrency.code);
-    setCoefficientsHistory(data);
+  const updateCoefficientsHistory = async (
+    paymentCurrency: CurrencyWithAmount,
+    purchasedCurrency: CurrencyWithAmount,
+  ) => {
+    const data: CurrencyCoefficient[] = await fetchCoefficientBetweenCurrencies(
+      paymentCurrency.code,
+      purchasedCurrency.code,
+    );
 
+    setCoefficientsHistory(data);
     setLatestCoefficient(data[data.length - 1]);
   };
 
   useEffect(() => {
     updatePaymentCurrency();
     updatePurchasedCurrency();
-    updateCoefficientsHistory();
-  }, [paymentCurrency.code, purchasedCurrency.code, latestCoefficient?.price]);
+    updateCoefficientsHistory(paymentCurrency, purchasedCurrency);
+  }, [paymentCurrency.code, purchasedCurrency.code]);
 
   useEffect(() => {
     const intervalId = setInterval(async () => {
-      await updateCoefficientsHistory();
+      await updateCoefficientsHistory(paymentCurrency, purchasedCurrency);
     }, FETCH_API_OFFSET);
 
     return () => {
       clearInterval(intervalId);
     };
-  }, []);
+  }, [paymentCurrency, purchasedCurrency]);
 
   return (
     <section className="currency-exchange">

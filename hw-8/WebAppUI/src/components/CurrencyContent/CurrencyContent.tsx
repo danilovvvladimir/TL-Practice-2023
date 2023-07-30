@@ -61,7 +61,7 @@ const CurrencyContent: FC<CurrencyContentProps> = ({
           />
 
           <CurrencySelect
-            value={purchasedCurrency}
+            value={{ ...purchasedCurrency, amount: paymentCurrency.amount * latestCoefficient.price }}
             onChange={e =>
               handleCurrencyChange(
                 e,
