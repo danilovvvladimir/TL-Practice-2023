@@ -4,11 +4,13 @@ import "./CurrencyExchange.css";
 import CurrencyContent from "../CurrencyContent/CurrencyContent";
 import Loader from "../Loader/Loader";
 import CurrencyHeader from "../CurrencyHeader/CurrencyHeader";
-import { handleCurrencyChange } from "../../utils/handleCurrencyChange";
 import { useCurrencyExchange } from "../../hooks/useCurrencyExchange";
+import { useHandleCurrencyChange } from "../../hooks/useHandleCurrencyChange";
 
 const CurrencyExchange: FC = () => {
   const { coefficientsHistory, latestCoefficient } = useCurrencyExchange();
+
+  const { handleCurrencyChange } = useHandleCurrencyChange();
 
   return (
     <section className="currency-exchange">
