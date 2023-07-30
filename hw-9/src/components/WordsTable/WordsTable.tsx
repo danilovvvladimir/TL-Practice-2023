@@ -1,6 +1,6 @@
 import { FC, useState } from "react";
 import { TableContainer, Paper, Table, TableHead, TableRow, TableCell, TableBody, Button, Fade } from "@mui/material";
-import { DictionaryPair } from "../../types/words";
+import { DictionaryPair } from "../../types/dictionary";
 import MenuIcon from "@mui/icons-material/Menu";
 import { capitalizeWord } from "../../utils/capitalizeWord";
 import Menu from "@mui/material/Menu";

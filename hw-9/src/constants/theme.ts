@@ -19,6 +19,17 @@ export const THEME = createTheme({
     fontWeightMedium: 500,
   },
   components: {
+    MuiInputBase: {
+      styleOverrides: {
+        root: {
+          padding: "0px",
+          borderRadius: "4px",
+          color: "#364963",
+          border: `1px solid #9FAFC6`,
+          backgroundColor: `#EFF2F5`,
+        },
+      },
+    },
     MuiTextField: {
       styleOverrides: {
         root: {
@@ -32,18 +43,6 @@ export const THEME = createTheme({
           },
         },
       },
-      variants: [
-        {
-          props: { variant: "outlined" },
-          style: {
-            padding: "0px",
-            borderRadius: "4px",
-            backgroundColor: `#EFF2F5`,
-            color: "#1565c0",
-            border: `1px solid #9FAFC6`,
-          },
-        },
-      ],
     },
     MuiButton: {
       styleOverrides: {

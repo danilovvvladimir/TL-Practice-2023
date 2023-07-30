@@ -1,16 +1,15 @@
 import { FC, useState, useEffect } from "react";
-import "./QuizGame.scss";
 import { useWordsStore } from "../../store/dictionary";
 import { Button, FormControl, Paper, Select, MenuItem } from "@mui/material";
 import { getRandomElements } from "../../utils/getRandomElements";
-import { DictionaryPair } from "../../types/words";
-import { getRandomIndex } from "../../utils/getRandomIndex";
+import { DictionaryPair } from "../../types/dictionary";
+import { getRandomArrayIndex } from "../../utils/getRandomArrayIndex";
 import { QuizGameHint } from "../../types/quiz";
 import { shuffleArray } from "../../utils/shuffleArray";
 import { capitalizeWord } from "../../utils/capitalizeWord";
-
 import { useQuizStore } from "../../store/quiz";
 import { useNavigate } from "react-router-dom";
+import "./QuizGame.scss";
 
 const QuizGame: FC = () => {
   const navigate = useNavigate();
@@ -25,7 +24,7 @@ const QuizGame: FC = () => {
 
   const [userChoice, setUserChoice] = useState("none");
   const [hintMessage, setHintMessage] = useState<QuizGameHint | null>(null);
-  const [isNextRoundDisabled, setIsNextRoundDisabled] = useState<boolean>(false);
+  const [isChangesDisabled, setIsChangesDisabled] = useState<boolean>(false);
 
   const handleCheck = () => {
     if (userChoice === currentQuizPair.englishWord) {
@@ -42,7 +41,7 @@ const QuizGame: FC = () => {
       });
     }
 
-    setIsNextRoundDisabled(true);
+    setIsChangesDisabled(true);
   };
 
   const handleNewRound = () => {
@@ -53,11 +52,11 @@ const QuizGame: FC = () => {
       setHintMessage(null);
     }
 
-    setIsNextRoundDisabled(false);
+    setIsChangesDisabled(false);
   };
 
   const handleCreatingNewWord = () => {
-    const newWord = leftWords[getRandomIndex(leftWords)];
+    const newWord = leftWords[getRandomArrayIndex(leftWords)];
 
     setCurrentQuizPair(newWord);
     setLeftWords(leftWords.filter(word => word.id !== newWord.id));
@@ -66,6 +65,7 @@ const QuizGame: FC = () => {
   };
 
   useEffect(() => {
+    setUserAnswers({ correct: 0, incorrect: 0 });
     handleCreatingNewWord();
   }, []);
 
@@ -92,7 +92,7 @@ const QuizGame: FC = () => {
                 Перевод на английский язык
               </label>
               <Select
-                disabled={isNextRoundDisabled}
+                disabled={isChangesDisabled}
                 value={userChoice}
                 onChange={event => setUserChoice(event.target.value)}
                 sx={{ width: "235px" }}
@@ -102,7 +102,7 @@ const QuizGame: FC = () => {
                 </MenuItem>
                 {randomAnswers.map(randomAnswer => (
                   <MenuItem key={randomAnswer} value={randomAnswer}>
-                    {randomAnswer}
+                    {capitalizeWord(randomAnswer)}
                   </MenuItem>
                 ))}
               </Select>
@@ -124,14 +124,15 @@ const QuizGame: FC = () => {
       </Paper>
       <div className="quiz-game__buttons">
         {round !== words.length ? (
-          <Button disabled={isNextRoundDisabled} variant="contained" onClick={handleCheck}>
+          <Button disabled={isChangesDisabled || userChoice === "none"} variant="contained" onClick={handleCheck}>
             Проверить
           </Button>
         ) : (
-          <Button disabled={isNextRoundDisabled} variant="contained" onClick={handleRedirectToResult}>
+          <Button disabled={userChoice === "none"} variant="contained" onClick={handleRedirectToResult}>
             Завершить
           </Button>
         )}
+
         {hintMessage && round !== words.length && (
           <Button variant="inverted" onClick={handleNewRound}>
             Дальше

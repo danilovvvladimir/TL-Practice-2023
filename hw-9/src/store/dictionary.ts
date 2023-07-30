@@ -1,7 +1,7 @@
 import { v4 as uuidv4 } from "uuid";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
-import { DictionaryPair, NewDictionaryPair } from "../types/words";
+import { DictionaryPair, NewDictionaryPair } from "../types/dictionary";
 
 interface WordsStore {
   words: DictionaryPair[];

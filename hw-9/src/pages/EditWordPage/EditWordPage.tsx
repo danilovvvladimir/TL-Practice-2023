@@ -19,8 +19,6 @@ const EditWordPage: FC = () => {
   }
 
   const handleSaving = (russianWord: string, englishWord: string) => {
-    console.log(russianWord, englishWord);
-
     if (!russianWord || !englishWord) {
       return;
     }

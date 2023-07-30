@@ -1,4 +1,4 @@
-import { DictionaryPair } from "../types/words";
+import { DictionaryPair } from "../types/dictionary";
 
 export const getRandomElements = (array: DictionaryPair[], correctWord: string, numElements: number): string[] => {
   if (numElements >= array.length) {
