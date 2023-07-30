@@ -1,7 +1,8 @@
 import { FC } from "react";
 import "./Title.scss";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
+import Button from "@mui/material/Button";
 
 interface TitleProps {
   titleMessage: string;
@@ -10,15 +11,16 @@ interface TitleProps {
 }
 
 const Title: FC<TitleProps> = ({ returnButtonPath, titleMessage, titleBoxClassName }) => {
+  const navigate = useNavigate();
   const finalClassName = titleBoxClassName ? `title-box ${titleBoxClassName}` : "title-box";
 
   return (
     <div className={finalClassName}>
       {returnButtonPath ? (
         <>
-          <Link to={returnButtonPath} className="button button--inverted title-box__button">
+          <Button variant="inverted" sx={{ width: "36px", height: "36px" }} onClick={() => navigate(returnButtonPath)}>
             <ChevronLeftIcon />
-          </Link>
+          </Button>
           <h1 className="title">{titleMessage}</h1>
         </>
       ) : (
