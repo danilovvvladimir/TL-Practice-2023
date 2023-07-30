@@ -1,31 +1,76 @@
-# React + TypeScript + Vite
+## Тренажёр иностранных слов (базовый функционал + zustand).
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+---
 
-Currently, two official plugins are available:
+### Стартовая страница (HomePage).
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses
-  [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast
-  Refresh
+![homepage](./ReadMeFiles/homepage.jpg)
 
-## Expanding the ESLint configuration
+### Словарь:
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+Пустой:
 
-- Configure the top-level `parserOptions` property like this:
+![dictionary-empty](./ReadMeFiles/dictionary-empty.jpg)
 
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
-```
+Заполненный
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or
-  `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` &
-  `plugin:react/jsx-runtime` to the `extends` list
+![dictionary-filled](./ReadMeFiles/dictionary-filled.jpg)
+
+### Добавление слова:
+
+Валидация на корректные значения инпутов:
+
+![add-word](./ReadMeFiles/add-word.jpg)
+
+![add-word-validation](./ReadMeFiles/add-word-validation.jpg)
+
+Когда все поля корректно заполнены, кнопка "Сохранить" становится активной.
+
+![add-word-ready](./ReadMeFiles/add-word-ready.jpg)
+
+### Редактирование слов.
+
+![dictionary-actions](./ReadMeFiles/dictionary-actions.jpg)
+
+Так же присутствует валидация.
+
+![edit-word-validation](./ReadMeFiles/edit-word-validation.jpg)
+
+![edit-word](./ReadMeFiles/edit-word.jpg)
+
+### Проверка знаний (QuizPage):
+
+Если в словаре пользователя меньше 4 слов, то нельзя пройти проверку.
+
+![quiz-unactive](./ReadMeFiles/quiz-unactive.jpg)
+
+Начало (Кнопка проверить неактивна до того момента, как будет выбрано слово):
+
+![quiz-select](./ReadMeFiles/quiz-select.jpg)
+
+После выбора:
+
+![quiz-ready](./ReadMeFiles/quiz-ready.jpg)
+
+#### После нажатия на кнопку проверить показывается проверка слова и появляется кнопка перейти к следующему слову:
+
+- Слово прошло проверку, ответ пользователя верен.
+
+![quiz-verification-positive](./ReadMeFiles/quiz-verification-positive.jpg)
+
+- Слово не прошло проверку, ответ пользователя неверен.
+
+![quiz-verification-negative](./ReadMeFiles/quiz-verification-negative.jpg)
+
+Так же по нажатию на кнопку проверить становится невозможным изменить свой ответ на вопрос.
+
+#### Финальный вопрос:
+
+![quiz-final-unactive](./ReadMeFiles/quiz-final-unactive.jpg)
+
+![quiz-final-active](./ReadMeFiles/quiz-final-active.jpg)
+
+#### Страница с результатом:
+
+![quiz-result](./ReadMeFiles/quiz-result.jpg)
+

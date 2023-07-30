@@ -23,19 +23,19 @@ const QuizGame: FC = () => {
   const [randomAnswers, setRandomAnswers] = useState<string[]>([]);
 
   const [userChoice, setUserChoice] = useState("none");
-  const [hintMessage, setHintMessage] = useState<QuizGameHint | null>(null);
+  const [verificationMessage, setVerificationMessage] = useState<QuizGameHint | null>(null);
   const [isChangesDisabled, setIsChangesDisabled] = useState<boolean>(false);
 
   const handleCheck = () => {
     if (userChoice === currentQuizPair.englishWord) {
       setUserAnswers({ ...userAnswers, correct: userAnswers.correct + 1 });
-      setHintMessage({
+      setVerificationMessage({
         isCorrect: true,
         message: `Правильно! ${currentQuizPair.russianWord} - ${currentQuizPair.englishWord}`,
       });
     } else {
       setUserAnswers({ ...userAnswers, incorrect: userAnswers.incorrect + 1 });
-      setHintMessage({
+      setVerificationMessage({
         isCorrect: false,
         message: `Неправильно! ${currentQuizPair.russianWord} - ${currentQuizPair.englishWord}, а не ${userChoice}`,
       });
@@ -49,7 +49,7 @@ const QuizGame: FC = () => {
 
     if (round < words.length) {
       handleCreatingNewWord();
-      setHintMessage(null);
+      setVerificationMessage(null);
     }
 
     setIsChangesDisabled(false);
@@ -110,15 +110,15 @@ const QuizGame: FC = () => {
           </FormControl>
         </div>
 
-        {hintMessage && (
+        {verificationMessage && (
           <div
             className={
-              hintMessage.isCorrect
+              verificationMessage.isCorrect
                 ? "quiz-game__hint quiz-game__hint--correct"
                 : "quiz-game__hint quiz-game__hint--incorrect"
             }
           >
-            {hintMessage.message}
+            {verificationMessage.message}
           </div>
         )}
       </Paper>
@@ -133,7 +133,7 @@ const QuizGame: FC = () => {
           </Button>
         )}
 
-        {hintMessage && round !== words.length && (
+        {verificationMessage && round !== words.length && (
           <Button variant="inverted" onClick={handleNewRound}>
             Дальше
           </Button>
