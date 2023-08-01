@@ -19,6 +19,7 @@ namespace DatabaseProvider.Repositories.Implementations
         {
             return Entities.Where(c => c.Id == id).FirstOrDefault();
         }
+
         public List<Client> GetByFirstName(string firstName)
         {
             return Entities.Where(c => c.FirstName == firstName).ToList();
