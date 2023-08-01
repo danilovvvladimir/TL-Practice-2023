@@ -32,6 +32,7 @@ namespace DatabaseProvider.Repositories
             {
                 return;
             }
+
             optionsBuilder.UseSqlServer(_connectionString);
         }
     }

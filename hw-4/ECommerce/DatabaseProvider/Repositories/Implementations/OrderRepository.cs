@@ -9,10 +9,12 @@ namespace DatabaseProvider.Repositories.Implementations
             : base(context)
         {
         }
+
         public List<Order> GetAll()
         {
             return Entities.ToList();
         }
+
         public Order GetById(int id)
         {
             return Entities.Where(o => o.Id == id).FirstOrDefault();
